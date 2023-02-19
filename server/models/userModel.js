@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
+const validator = require("validator");
+const jwt = require("jsonwebtoken");
 const { Schema } = mongoose;
 
 const UserSchema = new Schema(
@@ -8,15 +10,35 @@ const UserSchema = new Schema(
             type: String,
             required: true,
             unique: true,
+            validate: {
+                validator: validator.isEmail,
+                message: "Email is not valid",
+            },
         },
         password: {
             type: String,
-            required: true,
+            required: [true, "Please enter your password"],
+            minLength: [6, "Password must be at least 6 characters long"],
+            select: false,
+            trim: true,
         },
         role: {
             type: String,
             enum: ["admin", "user"],
             default: "user",
+        },
+        name: {
+            type: String,
+            required: [true, "Please enter your name"],
+            minLength: [3, "Name must be at least 3 characters long"],
+            maxLength: [20, "Name must be at most 20 characters long"],
+            trim: true,
+        },
+        lastName: {
+            type: String,
+            minLength: [3, "Last name must be at least 3 characters long"],
+
+            default: "lastname",
         },
         projects: [
             {
@@ -41,6 +63,11 @@ UserSchema.pre("save", async function (next) {
     }
 });
 
+UserSchema.methods.getSignedJwtToken = function () {
+    return jwt.sign({ id: this._id }, process.env.JWT_SECRET, {
+        expiresIn: process.env.JWT_EXPIRE,
+    });
+};
 UserSchema.methods.toJSON = function () {
     const user = this;
     const userObject = user.toObject();

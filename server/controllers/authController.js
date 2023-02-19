@@ -19,10 +19,12 @@ const register = async (req, res) => {
         email,
         password,
     });
+    const token = await user.getSignedJwtToken();
 
     res.status(StatusCodes.CREATED).json({
         success: true,
         data: user,
+        token,
     });
 };
 
