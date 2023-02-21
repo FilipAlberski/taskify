@@ -8,6 +8,12 @@ const register = async (req, res) => {
         throw new Error("Please provide name, email and password");
     }
 
+    //password validation
+
+    if (password.length < 6) {
+        throw new Error("Password must be at least 6 characters long");
+    }
+
     const isExisting = await User.findOne({ email });
 
     if (isExisting) {
