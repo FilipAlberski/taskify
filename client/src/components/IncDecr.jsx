@@ -1,15 +1,24 @@
 import { Button, CounterDiv } from "./IncDecr.styled.js";
-
+//redux
+import { useDispatch } from "react-redux";
+import { increment, decrement } from "../redux/counterSlice";
 const IncDecr = () => {
-    const handleClick = (e) => {
-        console.log(e.target.value);
-    };
+    const dispatch = useDispatch();
+
     return (
         <CounterDiv>
-            <Button value={+1} onClick={handleClick}>
+            <Button
+                onClick={() => {
+                    dispatch(increment());
+                }}
+            >
                 Increment
             </Button>
-            <Button value={-1} onClick={handleClick}>
+            <Button
+                onClick={() => {
+                    dispatch(decrement());
+                }}
+            >
                 Decrement
             </Button>
         </CounterDiv>
