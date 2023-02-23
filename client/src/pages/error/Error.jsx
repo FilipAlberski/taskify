@@ -5,12 +5,14 @@ import {
     ErrorText,
     LogoContainer,
 } from "./Error.styled";
+
+import Logo from "../../components/Logo/Logo";
 import errorImg from "../../assets/errorPage.svg";
 const Error = () => {
     return (
         <ErrorContainer>
             <LogoContainer>
-                <h1>Logo</h1>
+                <Logo />
             </LogoContainer>
             <ImageContainer>
                 <ErrorImage src={errorImg} />
