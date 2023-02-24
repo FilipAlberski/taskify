@@ -3,8 +3,10 @@ import styled from "styled-components";
 export const LandingContainer = styled.div`
     width: 100vw;
     height: 100vh;
-    background: var(--primary-color3);
+    color: var(--primary-color4);
+    background: var(--primary-color1);
     nav {
+        padding: 1rem;
         width: var(--fluid-width);
         max-width: var(--max-width);
         margin: 0 auto;
@@ -13,14 +15,6 @@ export const LandingContainer = styled.div`
         align-items: center;
     }
 
-    main {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        height: calc(100vh - var(--nav-height));
-        width: var(--fluid-width);
-    }
     .page {
         min-height: calc(100vh - var(--nav-height));
         display: grid;
@@ -29,6 +23,11 @@ export const LandingContainer = styled.div`
     }
     .main-img {
         display: none;
+    }
+    .img {
+        width: 100%;
+
+        object-fit: cover;
     }
     @media (min-width: 992px) {
         .page {

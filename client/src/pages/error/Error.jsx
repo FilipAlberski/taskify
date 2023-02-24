@@ -1,23 +1,24 @@
-import {
-    ErrorContainer,
-    ImageContainer,
-    ErrorImage,
-    ErrorText,
-    LogoContainer,
-} from "./Error.styled";
+import { ErrorContainer } from "./Error.styled";
 
 import Logo from "../../components/Logo/Logo";
+
 import errorImg from "../../assets/errorPage.svg";
 const Error = () => {
     return (
         <ErrorContainer>
-            <LogoContainer>
+            <nav>
                 <Logo />
-            </LogoContainer>
-            <ImageContainer>
-                <ErrorImage src={errorImg} />
-            </ImageContainer>
-            <ErrorText>Oops! Page not found</ErrorText>
+            </nav>
+            <main className="container page">
+                <div className="info">
+                    <h1>Page not found</h1>
+                    <p>
+                        The page you are looking for might have been removed,
+                        had its name changed or is temporarily unavailable.
+                    </p>
+                </div>
+                <img src={errorImg} alt="" className="img main-img" />
+            </main>
         </ErrorContainer>
     );
 };

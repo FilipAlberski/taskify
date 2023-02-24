@@ -1,4 +1,6 @@
+import { LogoContainer } from "./Logo.styled";
+
 const Logo = () => {
-    return <h1>Taskify</h1>;
+    return <LogoContainer>Taskify</LogoContainer>;
 };
 export default Logo;

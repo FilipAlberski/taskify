@@ -11,7 +11,7 @@ const GlobalStyle = createGlobalStyle`
   --primary-color1: #222831;
   --primary-color2: #393e46;
   --primary-color3: #00adb5;
-  --font-color: #eeeeee;
+  --primary-color4: #eeeeee;
 
   --fluid-width: 90vw;
   --max-width: 1120px;
