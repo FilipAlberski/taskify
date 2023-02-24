@@ -4,18 +4,17 @@ import { LandingContainer } from "./Landing.styled";
 const Landing = () => {
     return (
         <LandingContainer>
-            <div className="topPart">
+            <nav>
                 <Logo />
-            </div>
-            <div className="bottomPart">
-                <div className="left">
-                    <h1>Taskify</h1>
+            </nav>
+            <main className="container page">
+                <div className="info">
+                    <h1>Get your business online</h1>
                 </div>
-                <div className="right">
-                    <h1>Taskify</h1>
-                </div>
-            </div>
+                <img src="#" alt="test" className="img main-img" />
+            </main>
         </LandingContainer>
     );
 };
+
 export default Landing;

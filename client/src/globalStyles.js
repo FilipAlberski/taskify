@@ -12,6 +12,15 @@ const GlobalStyle = createGlobalStyle`
   --primary-color2: #393e46;
   --primary-color3: #00adb5;
   --font-color: #eeeeee;
+
+  --fluid-width: 90vw;
+  --max-width: 1120px;
+  --nav-height: 6rem;
+}
+.container {
+  width: var(--fluid-width);
+  max-width: var(--max-width);
+  margin: 0 auto;
 }
 `;
 
