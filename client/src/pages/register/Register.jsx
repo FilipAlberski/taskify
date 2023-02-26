@@ -1,5 +1,5 @@
 import { RegisterContainer } from "./Register.styled";
-
+import Logo from "../../components/logo/Logo";
 import { useState } from "react";
 const Register = () => {
     const [isMember, setIsMember] = useState(false);
@@ -16,11 +16,29 @@ const Register = () => {
     const handleChange = (e) => {
         const { name, value } = e.target;
         setValues({ ...values, [name]: value });
+    };
+
+    const validate = () => {
+        if (isMember) {
+            return email && password;
+        } else {
+            return (
+                username && email && password && password === confirmPassword
+            );
+        }
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (validate()) {
+            console.log("Validated");
+        }
+
         console.log(values);
     };
     return (
         <RegisterContainer>
-            <form action="#">
+            <form action="#" className="form" onSubmit={handleSubmit}>
                 <h1>{isMember ? "Login" : "Register"}</h1>
                 {!isMember && (
                     <div className="form-row">
@@ -77,7 +95,10 @@ const Register = () => {
                 <button className="form-btn" type="submit">
                     {isMember ? "Login" : "Register"}
                 </button>
-                <span onClick={() => setIsMember(!isMember)}>
+                <span
+                    className="alreadyRegistered"
+                    onClick={() => setIsMember(!isMember)}
+                >
                     {isMember ? "Need to register?" : "Already registered?"}
                 </span>
             </form>

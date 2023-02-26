@@ -8,10 +8,13 @@ const GlobalStyle = createGlobalStyle`
     font-family: Open-Sans, Helvetica, Sans-Serif;
   }
   :root {
-  --primary-color1: #222831;
-  --primary-color2: #393e46;
-  --primary-color3: #00adb5;
-  --primary-color4: #eeeeee;
+  --primary-color-dark: #222831;
+  
+  --primary-color:#f5f5f5;
+  --primary-color-light: #eeeeee;
+
+  --secondary-color: #00adb5;
+  --secondary-color-dark: #393e46;
 
   --fluid-width: 90vw;
   --max-width: 1120px;
