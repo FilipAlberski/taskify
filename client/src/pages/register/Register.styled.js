@@ -5,9 +5,20 @@ export const RegisterContainer = styled.section`
     width: 100vw;
     height: 100vh;
     display: flex;
-    justify-content: center;
-    align-items: center;
 
+    flex-direction: column;
+
+    .topPart {
+        width: 100%;
+        padding: 1rem;
+    }
+    .bottomPart {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
     form {
         justify-self: center;
         max-width: 500px;

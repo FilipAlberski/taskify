@@ -38,70 +38,78 @@ const Register = () => {
     };
     return (
         <RegisterContainer>
-            <form action="#" className="form" onSubmit={handleSubmit}>
-                <h1>{isMember ? "Login" : "Register"}</h1>
-                {!isMember && (
+            <div className="topPart">
+                <Logo />
+            </div>
+            <div className="bottomPart">
+                <form action="#" className="form" onSubmit={handleSubmit}>
+                    <h1>{isMember ? "Login" : "Register"}</h1>
+                    {!isMember && (
+                        <div className="form-row">
+                            <label htmlFor="username" className="form-label">
+                                Username
+                            </label>
+                            <input
+                                onChange={handleChange}
+                                type="text"
+                                value={username}
+                                name="username"
+                                className="form-input"
+                            />
+                        </div>
+                    )}
                     <div className="form-row">
-                        <label htmlFor="username" className="form-label">
-                            Username
+                        <label htmlFor="email" className="form-label">
+                            Email
                         </label>
                         <input
                             onChange={handleChange}
-                            type="text"
-                            value={username}
-                            name="username"
+                            type="email"
+                            value={email}
+                            name="email"
                             className="form-input"
                         />
                     </div>
-                )}
-                <div className="form-row">
-                    <label htmlFor="email" className="form-label">
-                        Email
-                    </label>
-                    <input
-                        onChange={handleChange}
-                        type="email"
-                        value={email}
-                        name="email"
-                        className="form-input"
-                    />
-                </div>
-                <div className="form-row">
-                    <label htmlFor="password" className="form-label">
-                        Password
-                    </label>
-                    <input
-                        type="password"
-                        value={password}
-                        onChange={handleChange}
-                        name="password"
-                        className="form-input"
-                    />
-                </div>
-                {!isMember && (
                     <div className="form-row">
-                        <label htmlFor="confirmPassword" className="form-label">
-                            Confirm Password
+                        <label htmlFor="password" className="form-label">
+                            Password
                         </label>
                         <input
                             type="password"
-                            value={confirmPassword}
+                            value={password}
                             onChange={handleChange}
-                            name="confirmPassword"
+                            name="password"
                             className="form-input"
                         />
                     </div>
-                )}
-                <button className="form-btn" type="submit">
-                    {isMember ? "Login" : "Register"}
-                </button>
-                <span
-                    className="alreadyRegistered"
-                    onClick={() => setIsMember(!isMember)}
-                >
-                    {isMember ? "Need to register?" : "Already registered?"}
-                </span>
-            </form>
+                    {!isMember && (
+                        <div className="form-row">
+                            <label
+                                htmlFor="confirmPassword"
+                                className="form-label"
+                            >
+                                Confirm Password
+                            </label>
+                            <input
+                                type="password"
+                                value={confirmPassword}
+                                onChange={handleChange}
+                                name="confirmPassword"
+                                className="form-input"
+                            />
+                        </div>
+                    )}
+                    <button className="form-btn" type="submit">
+                        {isMember ? "Login" : "Register"}
+                    </button>
+                    <span
+                        className="alreadyRegistered"
+                        onClick={() => setIsMember(!isMember)}
+                    >
+                        {isMember ? "Need to register?" : "Already registered?"}
+                    </span>
+                </form>
+            </div>
         </RegisterContainer>
     );
 };
