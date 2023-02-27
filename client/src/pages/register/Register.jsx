@@ -1,9 +1,10 @@
 import { RegisterContainer } from "./Register.styled";
 import Logo from "../../components/logo/Logo";
 import { useState } from "react";
+import axios from "axios";
 //redux
 import { useDispatch, useSelector } from "react-redux";
-import { setUser } from "../../redux/slices/appSlice";
+import { setUser, setLoading, setToken } from "../../redux/slices/appSlice";
 
 const Register = () => {
     //redux
@@ -38,22 +39,12 @@ const Register = () => {
         }
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        if (validate()) {
-            console.log("Validated");
-        }
+        const resposne = await axios.get("/api/v1");
+        console.log(resposne);
 
-        //redux set test user
-        dispatch(
-            setUser({
-                username: "test",
-                email: "dfa@aer.com",
-                password: "123",
-            })
-        );
-
-        console.log(appState.user);
+        //fetch
     };
     return (
         <RegisterContainer>

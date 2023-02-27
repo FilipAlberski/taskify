@@ -22,9 +22,12 @@ const appSlice = createSlice({
         setUser: (state, action) => {
             state.user = action.payload;
         },
+        setToken: (state, action) => {
+            state.token = action.payload;
+        },
     },
 });
 
-export const { setLoading, setAlert, setUser } = appSlice.actions;
+export const { setLoading, setAlert, setUser, setToken } = appSlice.actions;
 
 export default appSlice.reducer;
