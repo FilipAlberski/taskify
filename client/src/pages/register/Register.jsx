@@ -1,7 +1,15 @@
 import { RegisterContainer } from "./Register.styled";
 import Logo from "../../components/logo/Logo";
 import { useState } from "react";
+//redux
+import { useDispatch, useSelector } from "react-redux";
+import { setUser } from "../../redux/slices/appSlice";
+
 const Register = () => {
+    //redux
+    const dispatch = useDispatch();
+    const appState = useSelector((state) => state.app);
+
     const [isMember, setIsMember] = useState(false);
 
     const [values, setValues] = useState({
@@ -16,6 +24,8 @@ const Register = () => {
     const handleChange = (e) => {
         const { name, value } = e.target;
         setValues({ ...values, [name]: value });
+
+        //redux set test user
     };
 
     const validate = () => {
@@ -34,7 +44,16 @@ const Register = () => {
             console.log("Validated");
         }
 
-        console.log(values);
+        //redux set test user
+        dispatch(
+            setUser({
+                username: "test",
+                email: "dfa@aer.com",
+                password: "123",
+            })
+        );
+
+        console.log(appState.user);
     };
     return (
         <RegisterContainer>
