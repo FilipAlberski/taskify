@@ -4,6 +4,7 @@ const dotenv = require("dotenv").config();
 const errorHandlerMiddleware = require("./middleware/errorHandler");
 const authRoutes = require("./routes/authRoutes");
 const notFoundMiddleware = require("./middleware/notFound");
+const cors = require("cors");
 
 //connectDB
 
@@ -12,6 +13,8 @@ const connectDB = require("./db/connectDB");
 const app = express();
 
 app.use(express.json());
+
+app.use(cors());
 
 app.get("/api/v1/", (req, res) => {
     res.send("Hello World");

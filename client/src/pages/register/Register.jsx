@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setUser, setLoading, setToken } from "../../redux/slices/appSlice";
 
 const Register = () => {
+    const url = "http://localhost:4050/api/v1";
     //redux
     const dispatch = useDispatch();
     const appState = useSelector((state) => state.app);
@@ -41,10 +42,29 @@ const Register = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const resposne = await axios.get("/api/v1");
-        console.log(resposne);
+        //json send
+        const res = await fetch(`${url}/auth/register`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                name: username,
+                email,
+                password,
+            }),
+        });
+        const data = await res.json();
+        console.log(data);
 
-        //fetch
+        //redux set test user
+        dispatch(setUser(data.user));
+        dispatch(setLoading(false));
+        dispatch(setToken(data.token));
+
+        //redux test
+
+        console.log(appState);
     };
     return (
         <RegisterContainer>
