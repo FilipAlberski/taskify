@@ -4,7 +4,7 @@ const GlobalStyle = createGlobalStyle`
   body {
     margin: 0;
     padding: 0;
-    background: #222831;
+    background: #eeeeee;
     font-family: Open-Sans, Helvetica, Sans-Serif;
   }
   :root {

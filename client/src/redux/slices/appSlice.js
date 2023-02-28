@@ -19,11 +19,6 @@ const appSlice = createSlice({
             state.showAlert = true;
             state.alertText = action.payload.text;
             state.alertType = action.payload.type;
-            setTimeout(() => {
-                state.showAlert = false;
-                state.alertText = "";
-                state.alertType = "";
-            }, 5000);
         },
         setUser: (state, action) => {
             state.user = action.payload;

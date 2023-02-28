@@ -37,6 +37,15 @@ const Register = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        //show alert with timeout
+
+        dispatch(
+            setAlert({ text: "Loading...", type: "info", showAlert: true })
+        );
+        setTimeout(() => {
+            dispatch(setAlert({ text: "", type: "", showAlert: false }));
+        }, 5000);
     };
     return (
         <RegisterContainer>
