@@ -4,7 +4,12 @@ import { useState } from "react";
 import axios from "axios";
 //redux
 import { useDispatch, useSelector } from "react-redux";
-import { setUser, setLoading, setToken } from "../../redux/slices/appSlice";
+import {
+    setUser,
+    setLoading,
+    setToken,
+    setAlert,
+} from "../../redux/slices/appSlice";
 
 const Register = () => {
     const url = "http://localhost:4050/api/v1";
@@ -30,41 +35,8 @@ const Register = () => {
         //redux set test user
     };
 
-    const validate = () => {
-        if (isMember) {
-            return email && password;
-        } else {
-            return (
-                username && email && password && password === confirmPassword
-            );
-        }
-    };
-
     const handleSubmit = async (e) => {
         e.preventDefault();
-        //json send
-        const res = await fetch(`${url}/auth/register`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                name: username,
-                email,
-                password,
-            }),
-        });
-        const data = await res.json();
-        console.log(data);
-
-        //redux set test user
-        dispatch(setUser(data.user));
-        dispatch(setLoading(false));
-        dispatch(setToken(data.token));
-
-        //redux test
-
-        console.log(appState);
     };
     return (
         <RegisterContainer>
@@ -74,6 +46,8 @@ const Register = () => {
             <div className="bottomPart">
                 <form action="#" className="form" onSubmit={handleSubmit}>
                     <h1>{isMember ? "Login" : "Register"}</h1>
+                    {appState.isLoading && <h2>Loading...</h2>}
+                    {appState.showAlert && <h1>{appState.alertText}</h1>}
                     {!isMember && (
                         <div className="form-row">
                             <label htmlFor="username" className="form-label">

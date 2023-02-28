@@ -15,9 +15,15 @@ const appSlice = createSlice({
             state.isLoading = action.payload;
         },
         setAlert: (state, action) => {
-            state.showAlert = action.payload.showAlert;
-            state.alertText = action.payload.alertText;
-            state.alertType = action.payload.alertType;
+            //show alert for 5 seconds
+            state.showAlert = true;
+            state.alertText = action.payload.text;
+            state.alertType = action.payload.type;
+            setTimeout(() => {
+                state.showAlert = false;
+                state.alertText = "";
+                state.alertType = "";
+            }, 5000);
         },
         setUser: (state, action) => {
             state.user = action.payload;

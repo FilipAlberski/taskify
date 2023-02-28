@@ -3,18 +3,18 @@ import styled from "styled-components";
 export const RegisterContainer = styled.section`
     background-color: var(--primary-color-light);
     width: 100vw;
+    max-width: 100%;
     height: 100vh;
     display: flex;
 
     flex-direction: column;
 
     .topPart {
-        width: 100%;
         padding: 1rem;
     }
     .bottomPart {
-        width: 100%;
-        height: 100%;
+        height: 100vh;
+        max-height: 120vh;
         display: flex;
         justify-content: center;
         align-items: center;
