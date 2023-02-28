@@ -1,85 +1,34 @@
 import styled from "styled-components";
 
-export const RegisterContainer = styled.section`
-    background-color: var(--primary-color-light);
-    width: 100vw;
-    max-width: 100%;
-    height: 100vh;
+export const RegisterContainer = styled.div`
+    background-color: var(--background-color);
     display: flex;
-
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
 
-    .topPart {
-        padding: 1rem;
+    .logo {
+        position: absolute;
+        top: 0;
+        left: 0;
+        margin: 1rem;
     }
-    .bottomPart {
-        height: 100vh;
-        max-height: 120vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    form {
-        justify-self: center;
-        max-width: 500px;
-        width: 90%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 2rem;
-        border-radius: var(--borderRadius);
-        box-shadow: var(--shadow-1);
+
+    .form-wrapper {
+        max-width: 90%;
+        margin: 1rem;
+        width: 400px;
         background-color: var(--primary-color);
-        margin: 2rem;
-
-        @media screen and (max-width: 768px) {
-            padding: 1rem;
-            margin: 1rem;
-        }
-        .alreadyRegistered {
-            margin-top: 1rem;
-            a {
-                color: var(--secondary-color);
-                text-decoration: none;
-                &:hover {
-                    text-decoration: underline;
-                }
-            }
-        }
-        .form-btn {
-            width: 100%;
-            padding: 0.5rem;
-            border: none;
-            border-radius: var(--borderRadius);
-            background-color: var(--secondary-color);
-            color: var(--primary-color);
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.3s ease-in-out;
-            &:hover {
-                background-color: var(--secondary-color-dark);
-            }
-        }
-
-        .form-row {
-            width: 100%;
-            max-width: 100%;
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            grid-gap: 1rem;
-
-            margin-bottom: 1rem;
-            input {
-                width: 95%;
-                padding: 0.5rem;
-                border: 1px solid var(--secondary-color);
-                border-radius: var(--borderRadius);
-                outline: none;
-                font-size: 1rem;
-            }
-            @media screen and (max-width: 768px) {
-                grid-template-columns: 1fr;
-            }
+        border-radius: var(--borderRadius);
+        .title {
+            line-height: 80px;
+            background-color: var(--background-color-darker);
+            border-radius: 0.4rem 0.4rem 0 0;
+            padding-left: 30px;
+            font-size: 25px;
+            font-weight: 600;
+            color: #fff;
         }
     }
 `;

@@ -1,7 +1,10 @@
 import { RegisterContainer } from "./Register.styled";
-import Logo from "../../components/logo/Logo";
+import { AiOutlineUser, AiOutlineMail } from "react-icons/ai";
+import { MdPassword } from "react-icons/md";
 import { useState } from "react";
-import axios from "axios";
+
+import Logo from "../../components/Logo/Logo";
+
 //redux
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -12,13 +15,10 @@ import {
 } from "../../redux/slices/appSlice";
 
 const Register = () => {
-    const url = "http://localhost:4050/api/v1";
-    //redux
-    const dispatch = useDispatch();
-    const appState = useSelector((state) => state.app);
-
+    //isMember
     const [isMember, setIsMember] = useState(false);
 
+    //values of form
     const [values, setValues] = useState({
         username: "",
         email: "",
@@ -33,83 +33,45 @@ const Register = () => {
         setValues({ ...values, [name]: value });
     };
 
-    const handleSubmit = async (e) => {
+    //handle submit
+
+    const handleSubmit = (e) => {
         e.preventDefault();
     };
+
     return (
         <RegisterContainer>
-            <div className="topPart">
+            <div className="logo">
                 <Logo />
             </div>
-            <div className="bottomPart">
-                <form action="#" className="form" onSubmit={handleSubmit}>
-                    <h1>{isMember ? "Login" : "Register"}</h1>
-                    {appState.isLoading && <h2>Loading...</h2>}
-                    {appState.showAlert && <h1>{appState.alertText}</h1>}
-                    {!isMember && (
-                        <div className="form-row">
-                            <label htmlFor="username" className="form-label">
-                                Username
-                            </label>
-                            <input
-                                onChange={handleChange}
-                                type="text"
-                                value={username}
-                                name="username"
-                                className="form-input"
-                            />
-                        </div>
-                    )}
+            <div className="form-wrapper">
+                <div className="title">
+                    <span>{isMember ? "Login" : "Register"}</span>
+                </div>
+                <form className="form">
                     <div className="form-row">
-                        <label htmlFor="email" className="form-label">
-                            Email
-                        </label>
-                        <input
-                            onChange={handleChange}
-                            type="email"
-                            value={email}
-                            name="email"
-                            className="form-input"
-                        />
+                        <button
+                            type="submit"
+                            className="submit-btn"
+                            onClick={handleSubmit}
+                        >
+                            {isMember ? "Login" : "Register"}
+                        </button>
                     </div>
                     <div className="form-row">
-                        <label htmlFor="password" className="form-label">
-                            Password
-                        </label>
-                        <input
-                            type="password"
-                            value={password}
-                            onChange={handleChange}
-                            name="password"
-                            className="form-input"
-                        />
+                        <span className="form-text">
+                            {isMember
+                                ? "Don't have an account?"
+                                : "Already have an account?"}
+                        </span>
+                        <button
+                            type="button"
+                            className="form-btn"
+                            onClick={() => setIsMember(!isMember)}
+                        >
+                            {isMember ? "Register" : "Login"}
+                        </button>
                     </div>
-                    {!isMember && (
-                        <div className="form-row">
-                            <label
-                                htmlFor="confirmPassword"
-                                className="form-label"
-                            >
-                                Confirm Password
-                            </label>
-                            <input
-                                type="password"
-                                value={confirmPassword}
-                                onChange={handleChange}
-                                name="confirmPassword"
-                                className="form-input"
-                            />
-                        </div>
-                    )}
-                    <button className="form-btn" type="submit">
-                        {isMember ? "Login" : "Register"}
-                    </button>
-                    <span
-                        className="alreadyRegistered"
-                        onClick={() => setIsMember(!isMember)}
-                    >
-                        {isMember ? "Need to register?" : "Already registered?"}
-                    </span>
                 </form>
             </div>
         </RegisterContainer>

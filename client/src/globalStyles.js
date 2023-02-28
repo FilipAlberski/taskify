@@ -6,9 +6,15 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
     background: #eeeeee;
     font-family: Open-Sans, Helvetica, Sans-Serif;
+    
+  }
+  *{
+    box-sizing: border-box;
   }
   :root {
   --primary-color-dark: #222831;
+  --background-color:#1abc9c;
+  --background-color-darker: #16a085;
   
   --primary-color:#f5f5f5;
   --primary-color-light: #eeeeee;
@@ -21,7 +27,7 @@ const GlobalStyle = createGlobalStyle`
   --nav-height: 6rem;
 
   --fixed-width: 500px;
-  --borderRadius: 1rem;
+  --borderRadius: 0.4rem;
 
    /* box shadow*/
    --shadow-1: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
@@ -31,11 +37,6 @@ const GlobalStyle = createGlobalStyle`
     0 4px 6px -2px rgba(0, 0, 0, 0.05);
   --shadow-4: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
     0 10px 10px -5px rgba(0, 0, 0, 0.04);
-}
-.container {
-  width: var(--fluid-width);
-  max-width: var(--max-width);
-  margin: 0 auto;
 }
 
 `;
