@@ -3,7 +3,7 @@ import { createGlobalStyle } from "styled-components";
 const GlobalStyle = createGlobalStyle`
   body {
    
-    background: #eeeeee;
+    
     font-family: Open-Sans, Helvetica, Sans-Serif;
     
   }
@@ -15,7 +15,20 @@ const GlobalStyle = createGlobalStyle`
   :root {
  
 }
-
 `;
 
-export default GlobalStyle;
+const lightTheme = {
+    color: "#000",
+    background: "#f5f5f5",
+    background2: "#fff",
+    specialColor: "#38ace7",
+};
+
+const darkTheme = {
+    color: "#fff",
+    background: "#32333d",
+    background2: "#373740",
+    specialColor: "#141414",
+};
+
+export { GlobalStyle, lightTheme, darkTheme };

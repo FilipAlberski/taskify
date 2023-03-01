@@ -1,4 +1,4 @@
-import GlobalStyle from "./globalStyles";
+import { GlobalStyle, lightTheme, darkTheme } from "./globalStyles";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 //Pages
@@ -6,9 +6,10 @@ import Dashboard from "./pages/dashboard/Dashboard";
 import Landing from "./pages/landing/Landing";
 import Error from "./pages/error/Error";
 import Register from "./pages/register/Register";
+import { ThemeProvider } from "styled-components";
 function App() {
     return (
-        <div id="light">
+        <ThemeProvider theme={lightTheme}>
             <GlobalStyle />
             <BrowserRouter>
                 <Routes>
@@ -18,7 +19,7 @@ function App() {
                     <Route path="*" element={<Error />} />
                 </Routes>
             </BrowserRouter>
-        </div>
+        </ThemeProvider>
     );
 }
 

@@ -4,5 +4,5 @@ export const LogoContainer = styled.div`
     height: 100%;
     width: 100%;
     font-size: 2rem;
-    color: var(--primary-color3);
+    color: ${(props) => props.theme.specialColor};
 `;

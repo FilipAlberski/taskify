@@ -1,9 +1,10 @@
+//components
 import { RegisterContainer } from "./Register.styled";
-import { AiOutlineUser, AiOutlineMail } from "react-icons/ai";
-import { MdPassword } from "react-icons/md";
-import { useState } from "react";
-
 import Logo from "../../components/Logo/Logo";
+import FormRow from "../../components/formRow/FormRow";
+
+//react
+import { useState } from "react";
 
 //redux
 import { useDispatch, useSelector } from "react-redux";
@@ -39,6 +40,73 @@ const Register = () => {
         e.preventDefault();
     };
 
-    return <RegisterContainer>register</RegisterContainer>;
+    return (
+        <RegisterContainer>
+            <nav>
+                <Logo />
+            </nav>
+
+            <form>
+                <div className="title">
+                    <h1>{isMember ? "Login" : "Register"}</h1>
+                </div>
+                <div className="inputs">
+                    {!isMember && (
+                        <FormRow
+                            type="text"
+                            name="username"
+                            value={username}
+                            placeholder="Your nick name"
+                            handleChange={handleChange}
+                            labelText="Username"
+                        />
+                    )}
+                    <FormRow
+                        type="email"
+                        name="email"
+                        value={email}
+                        placeholder="Your internet mail"
+                        handleChange={handleChange}
+                        labelText="Email"
+                    />
+                    <FormRow
+                        labelText="Password"
+                        type="password"
+                        name="password"
+                        value={password}
+                        placeholder="Your secret password"
+                        handleChange={handleChange}
+                    />
+                    {!isMember && (
+                        <FormRow
+                            labelText="Confirm Password"
+                            type="password"
+                            name="confirmPassword"
+                            value={confirmPassword}
+                            placeholder="Let's confirm your password"
+                            handleChange={handleChange}
+                        />
+                    )}
+                </div>
+                <div className="isMember">
+                    <p>
+                        {isMember
+                            ? "Don't have an account? "
+                            : "Already have an account? "}
+                        <span onClick={() => setIsMember(!isMember)}>
+                            {isMember ? "Register" : "Login"}
+                        </span>
+                    </p>
+                </div>
+                <button
+                    type="submit"
+                    className="submitButton"
+                    onClick={handleSubmit}
+                >
+                    {isMember ? "Login" : "Create Account"}
+                </button>
+            </form>
+        </RegisterContainer>
+    );
 };
 export default Register;
