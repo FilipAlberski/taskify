@@ -97,6 +97,11 @@ const Register = () => {
                             {isMember ? "Register" : "Login"}
                         </span>
                     </p>
+                    {isMember && (
+                        <p>
+                            <span>Forgot password?</span>
+                        </p>
+                    )}
                 </div>
                 <button
                     type="submit"
