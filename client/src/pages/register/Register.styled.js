@@ -36,6 +36,7 @@ export const RegisterContainer = styled.div`
             width: 100%;
             padding: 2rem;
             background-color: ${(props) => props.theme.specialColor};
+            color: ${(props) => props.theme.white};
         }
         .inputs {
             width: 100%;
@@ -47,14 +48,20 @@ export const RegisterContainer = styled.div`
             gap: 0.5rem;
         }
         .isMember {
-            text-align: center;
-            font-size: 1.3rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            gap: 0.5rem;
+            font-size: 1.2rem;
             font-weight: 500;
             padding-bottom: 1rem;
             color: ${(props) => props.theme.color};
 
             span {
-                color: ${(props) => props.theme.specialColor};
+                color: ${(props) => props.theme.color};
+                border-bottom: ${(props) => props.theme.specialColor} 2px solid;
 
                 cursor: pointer;
             }
@@ -86,7 +93,7 @@ export const RegisterContainer = styled.div`
             padding: 1rem;
             border-radius: 0 0 2rem 2rem;
             background-color: ${(props) => props.theme.specialColor};
-            color: ${(props) => props.theme.color};
+            color: ${(props) => props.theme.white};
             font-size: 1.3rem;
             font-weight: 500;
             border: none;

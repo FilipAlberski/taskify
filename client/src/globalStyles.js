@@ -21,7 +21,8 @@ const lightTheme = {
     color: "#000",
     background: "#f5f5f5",
     background2: "#fff",
-    specialColor: "#38ace7",
+    specialColor: "#0077b6",
+    white: "#fff",
 };
 
 const darkTheme = {
@@ -29,6 +30,7 @@ const darkTheme = {
     background: "#32333d",
     background2: "#373740",
     specialColor: "#141414",
+    white: "#fff",
 };
 
 export { GlobalStyle, lightTheme, darkTheme };
