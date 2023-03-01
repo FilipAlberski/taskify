@@ -39,42 +39,6 @@ const Register = () => {
         e.preventDefault();
     };
 
-    return (
-        <RegisterContainer>
-            <div className="logo">
-                <Logo />
-            </div>
-            <div className="form-wrapper">
-                <div className="title">
-                    <span>{isMember ? "Login" : "Register"}</span>
-                </div>
-                <form className="form">
-                    <div className="form-row">
-                        <button
-                            type="submit"
-                            className="submit-btn"
-                            onClick={handleSubmit}
-                        >
-                            {isMember ? "Login" : "Register"}
-                        </button>
-                    </div>
-                    <div className="form-row">
-                        <span className="form-text">
-                            {isMember
-                                ? "Don't have an account?"
-                                : "Already have an account?"}
-                        </span>
-                        <button
-                            type="button"
-                            className="form-btn"
-                            onClick={() => setIsMember(!isMember)}
-                        >
-                            {isMember ? "Register" : "Login"}
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </RegisterContainer>
-    );
+    return <RegisterContainer>register</RegisterContainer>;
 };
 export default Register;

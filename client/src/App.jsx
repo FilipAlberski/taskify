@@ -8,7 +8,7 @@ import Error from "./pages/error/Error";
 import Register from "./pages/register/Register";
 function App() {
     return (
-        <>
+        <div id="light">
             <GlobalStyle />
             <BrowserRouter>
                 <Routes>
@@ -18,7 +18,7 @@ function App() {
                     <Route path="*" element={<Error />} />
                 </Routes>
             </BrowserRouter>
-        </>
+        </div>
     );
 }
 
