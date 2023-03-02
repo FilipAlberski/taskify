@@ -14,6 +14,7 @@ import {
     setToken,
     setAlert,
 } from "../../redux/slices/appSlice";
+import ThemeSwitch from "../../components/ThemeSwitch/ThemeSwitch";
 
 const Register = () => {
     //isMember
@@ -44,6 +45,7 @@ const Register = () => {
         <RegisterContainer>
             <nav>
                 <Logo />
+                <ThemeSwitch />
             </nav>
 
             <form>

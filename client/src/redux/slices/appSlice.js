@@ -9,6 +9,7 @@ const appSlice = createSlice({
         alertType: "",
         user: null,
         token: null,
+        theme: "light",
     },
     reducers: {
         setLoading: (state, action) => {
@@ -26,9 +27,13 @@ const appSlice = createSlice({
         setToken: (state, action) => {
             state.token = action.payload;
         },
+        setTheme: (state, action) => {
+            state.theme = action.payload;
+        },
     },
 });
 
-export const { setLoading, setAlert, setUser, setToken } = appSlice.actions;
+export const { setLoading, setAlert, setUser, setToken, setTheme } =
+    appSlice.actions;
 
 export default appSlice.reducer;
