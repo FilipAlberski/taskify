@@ -11,6 +11,7 @@ export const RegisterContainer = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    transition: all 0.3s ease;
 
     //shadow
 
@@ -21,5 +22,19 @@ export const RegisterContainer = styled.div`
         padding: 1rem;
 
         width: 100%;
+        display: flex;
+        flex-direction: row;
+    }
+    form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 380px;
+        max-width: 90%;
+        padding: 2rem;
+        background-color: ${(props) => props.theme.background2};
+        box-shadow: ${(props) => props.theme.bigShadow};
+        border-radius: 1rem;
     }
 `;

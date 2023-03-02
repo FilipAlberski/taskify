@@ -21,8 +21,9 @@ export const ThemeSwitchContainer = styled.div`
         left: 0;
         right: 0;
         bottom: 0;
-        background: #2c3e50;
+        background: ${(props) => props.theme.specialColor};
         transition: 0.3s;
+
         border-radius: 30px;
     }
     span:before {
@@ -32,13 +33,13 @@ export const ThemeSwitchContainer = styled.div`
         width: 25px;
         left: 3px;
         bottom: 2.6px;
-        background-color: #fff;
+        background-color: ${(props) => props.theme.background3};
         border-radius: 50%;
         transition: 0.3s;
     }
 
     input:checked + span {
-        background-color: ${(props) => props.theme.specialColor};
+        background-color: ${(props) => props.theme.background1};
     }
 
     input:checked + span:before {

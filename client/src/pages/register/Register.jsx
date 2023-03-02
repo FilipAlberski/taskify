@@ -90,6 +90,14 @@ const Register = () => {
                         />
                     )}
                 </div>
+
+                <button
+                    type="submit"
+                    className="submitButton"
+                    onClick={handleSubmit}
+                >
+                    {isMember ? "Login" : "Create Account"}
+                </button>
                 <div className="isMember">
                     <p>
                         {isMember
@@ -105,13 +113,6 @@ const Register = () => {
                         </p>
                     )}
                 </div>
-                <button
-                    type="submit"
-                    className="submitButton"
-                    onClick={handleSubmit}
-                >
-                    {isMember ? "Login" : "Create Account"}
-                </button>
             </form>
         </RegisterContainer>
     );

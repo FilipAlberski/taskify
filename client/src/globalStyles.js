@@ -19,18 +19,24 @@ const GlobalStyle = createGlobalStyle`
 
 const lightTheme = {
     color: "#000",
-    background: "#f5f5f5",
-    background2: "#fff",
+    background: "#f5f5f5", //offwhite
+    background2: "#fff", //white
+    background3: "#dddddd", //lightgray
     specialColor: "#0077b6",
     white: "#fff",
+
+    bigShadow: "8px 8px 64px 0px rgba(66, 68, 90, 1)",
 };
 
 const darkTheme = {
     color: "#fff",
-    background: "#32333d",
-    background2: "#373740",
-    specialColor: "#141414",
+    background: "#0d1116", //darkgray
+    background2: "#161b22", //lightdarkgray
+    background3: "#161b22", //darkergray
+    specialColor: "#fff",
     white: "#fff",
+
+    bigShadow: "8px 8px 64px 0px rgba(102, 102, 102, 1)",
 };
 
 export { GlobalStyle, lightTheme, darkTheme };
