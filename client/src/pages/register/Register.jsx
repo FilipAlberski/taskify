@@ -103,13 +103,19 @@ const Register = () => {
                         {isMember
                             ? "Don't have an account? "
                             : "Already have an account? "}
-                        <span onClick={() => setIsMember(!isMember)}>
+                        <span
+                            className="registerSpan"
+                            onClick={() => setIsMember(!isMember)}
+                        >
                             {isMember ? "Register" : "Login"}
                         </span>
                     </p>
                     {isMember && (
                         <p>
-                            <span>Forgot password?</span>
+                            <span>
+                                Forgot{" "}
+                                <span className="forgotSpan">password</span>?
+                            </span>
                         </p>
                     )}
                 </div>

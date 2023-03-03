@@ -11,8 +11,7 @@ export const RegisterContainer = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    transition: all 0.3s ease;
-
+    transition: all 0.5s ease;
     //shadow
 
     nav {
@@ -47,6 +46,24 @@ export const RegisterContainer = styled.div`
             font-size: 1.2rem;
             margin-bottom: 1rem;
             cursor: pointer;
+        }
+
+        .isMember {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            justify-content: center;
+            width: 100%;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+            color: ${(props) => props.theme.color};
+            .registerSpan {
+                color: ${(props) => props.theme.specialColor};
+            }
+            .forgotSpan {
+                color: ${(props) => props.theme.specialColor};
+            }
         }
     }
 
