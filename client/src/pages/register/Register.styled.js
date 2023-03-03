@@ -36,5 +36,49 @@ export const RegisterContainer = styled.div`
         background-color: ${(props) => props.theme.background2};
         box-shadow: ${(props) => props.theme.bigShadow};
         border-radius: 1rem;
+
+        .submitButton {
+            width: 100%;
+            padding: 0.5rem;
+            border: none;
+            border-radius: 0.5rem;
+            background-color: ${(props) => props.theme.specialColor};
+            color: ${(props) => props.theme.white};
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            cursor: pointer;
+        }
+    }
+
+    .inputs {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        width: 100%;
+        margin-bottom: 1rem;
+
+        .form-row {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+            width: 100%;
+
+            label {
+                font-size: 1.2rem;
+                margin-bottom: 0.5rem;
+            }
+            input {
+                width: 100%;
+                padding: 0.5rem;
+                border: none;
+                border-radius: 0.5rem;
+                background-color: ${(props) => props.theme.background3};
+                color: ${(props) => props.theme.color};
+                font-size: 1.2rem;
+                margin-bottom: 1rem;
+            }
+        }
     }
 `;

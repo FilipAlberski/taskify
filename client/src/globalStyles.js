@@ -32,8 +32,8 @@ const darkTheme = {
     color: "#fff",
     background: "#0d1116", //darkgray
     background2: "#161b22", //lightdarkgray
-    background3: "#161b22", //darkergray
-    specialColor: "#fff",
+    background3: "#212121", //darkergray
+    specialColor: "#9a02b9",
     white: "#fff",
 
     bigShadow: "8px 8px 64px 0px rgba(102, 102, 102, 1)",
