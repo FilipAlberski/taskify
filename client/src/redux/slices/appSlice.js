@@ -16,7 +16,6 @@ const appSlice = createSlice({
             state.isLoading = action.payload;
         },
         setAlert: (state, action) => {
-            //show alert for 5 seconds
             state.showAlert = true;
             state.alertText = action.payload.text;
             state.alertType = action.payload.type;
