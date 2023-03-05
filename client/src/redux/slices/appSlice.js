@@ -16,7 +16,7 @@ const appSlice = createSlice({
             state.isLoading = action.payload;
         },
         setAlert: (state, action) => {
-            state.showAlert = true;
+            state.showAlert = action.payload.show;
             state.alertText = action.payload.text;
             state.alertType = action.payload.type;
         },
