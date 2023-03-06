@@ -17,6 +17,14 @@ import {
 import ThemeSwitch from "../../components/ThemeSwitch/ThemeSwitch";
 
 const Register = () => {
+    //redux
+
+    const dispatch = useDispatch();
+    const appSlice = useSelector((state) => state.app);
+
+    //test
+
+    console.log(appSlice);
     //isMember
     const [isMember, setIsMember] = useState(false);
 
@@ -30,13 +38,13 @@ const Register = () => {
 
     const { username, email, password, confirmPassword } = values;
 
+    //handle change
     const handleChange = (e) => {
         const { name, value } = e.target;
         setValues({ ...values, [name]: value });
     };
 
     //handle submit
-
     const handleSubmit = (e) => {
         e.preventDefault();
     };
