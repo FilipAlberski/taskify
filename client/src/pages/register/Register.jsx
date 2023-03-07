@@ -68,7 +68,7 @@ const Register = () => {
                             value={username}
                             placeholder="Your nick name"
                             handleChange={handleChange}
-                            labelText="Username"
+                            labelText="Username:"
                         />
                     )}
                     <FormRow
@@ -77,10 +77,10 @@ const Register = () => {
                         value={email}
                         placeholder="Your internet mail"
                         handleChange={handleChange}
-                        labelText="Email"
+                        labelText="Email:"
                     />
                     <FormRow
-                        labelText="Password"
+                        labelText="Password:"
                         type="password"
                         name="password"
                         value={password}
@@ -89,7 +89,7 @@ const Register = () => {
                     />
                     {!isMember && (
                         <FormRow
-                            labelText="Confirm Password"
+                            labelText="Confirm Password:"
                             type="password"
                             name="confirmPassword"
                             value={confirmPassword}

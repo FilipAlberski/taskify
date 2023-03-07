@@ -13,7 +13,9 @@ export const RegisterContainer = styled.div`
     justify-content: center;
     transition: all 0.5s ease;
     //shadow
-
+    .title {
+        padding-bottom: 1rem;
+    }
     nav {
         position: absolute;
         top: 0;
@@ -31,7 +33,7 @@ export const RegisterContainer = styled.div`
         justify-content: center;
         width: 380px;
         max-width: 90%;
-        padding: 2rem;
+        padding: 2rem 2rem 1rem 2rem;
         background-color: ${(props) => props.theme.background2};
         box-shadow: ${(props) => props.theme.bigShadow};
         border-radius: 1rem;
@@ -56,7 +58,7 @@ export const RegisterContainer = styled.div`
             justify-content: center;
             width: 100%;
             margin-bottom: 1rem;
-            font-size: 1.2rem;
+            font-size: 0.9rem;
             color: ${(props) => props.theme.color};
             .registerSpan {
                 color: ${(props) => props.theme.specialColor};
@@ -83,8 +85,8 @@ export const RegisterContainer = styled.div`
             width: 100%;
 
             label {
-                font-size: 1.2rem;
-                margin-bottom: 0.5rem;
+                font-size: 1rem;
+                margin-bottom: 0.2rem;
             }
             input {
                 width: 100%;
@@ -93,8 +95,8 @@ export const RegisterContainer = styled.div`
                 border-radius: 0.5rem;
                 background-color: ${(props) => props.theme.background3};
                 color: ${(props) => props.theme.color};
-                font-size: 1.2rem;
-                margin-bottom: 1rem;
+                font-size: 1rem;
+                margin-bottom: 0.6rem;
             }
         }
     }
