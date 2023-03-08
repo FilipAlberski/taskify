@@ -6,12 +6,8 @@ const Alert = () => {
     const { showAlert, alertType, alertText } = appSlice;
 
     return (
-        <AlertContainer>
-            {showAlert && (
-                <div className={`alert ${alertType}`}>
-                    <p>{alertText}</p>
-                </div>
-            )}
+        <AlertContainer className={`alert alert-${alertType}`}>
+            {alertText}
         </AlertContainer>
     );
 };

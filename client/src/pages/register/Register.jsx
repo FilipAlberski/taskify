@@ -2,7 +2,7 @@
 import { RegisterContainer } from "./Register.styled";
 import Logo from "../../components/Logo/Logo";
 import FormRow from "../../components/formRow/FormRow";
-
+import Alert from "../../components/alert/Alert";
 //react
 import { useState } from "react";
 
@@ -60,6 +60,12 @@ const Register = () => {
                 <div className="title">
                     <h1>{isMember ? "Login" : "Register"}</h1>
                 </div>
+                {appSlice.showAlert && (
+                    <Alert
+                        alertType={appSlice.alertType}
+                        alertText={appSlice.alertText}
+                    />
+                )}
                 <div className="inputs">
                     {!isMember && (
                         <FormRow
