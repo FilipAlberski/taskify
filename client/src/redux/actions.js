@@ -4,7 +4,7 @@ export const setAlertWithTimeout = (dispatch, text, type, timeout) => {
     dispatch(setShowAlert({ text, type }));
     setTimeout(() => {
         dispatch(setHideAlert());
-    }, timeout);
+    }, timeout || 5000);
 };
 
 export const stopAlert = () => {

@@ -48,7 +48,24 @@ const Register = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        setAlertWithTimeout(dispatch, "Please wait...", "info", 2000);
+        if (!email || !password || (!isMember && !username)) {
+            setAlertWithTimeout(dispatch, "Please fill all fields", "danger");
+
+            return;
+        }
+
+        if (!isMember && password !== confirmPassword) {
+            setAlertWithTimeout(dispatch, "Passwords do not match", "danger");
+            return;
+        }
+
+        const currentUser = {
+            name: username,
+            email,
+            password,
+        };
+
+        dispatch(setLoading(true));
     };
 
     return (
