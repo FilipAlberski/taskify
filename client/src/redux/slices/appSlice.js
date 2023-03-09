@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { useEffect } from "react";
 
 const appSlice = createSlice({
     name: "app",
@@ -15,10 +16,15 @@ const appSlice = createSlice({
         setLoading: (state, action) => {
             state.isLoading = action.payload;
         },
-        setAlert: (state, action) => {
-            state.showAlert = action.payload.show;
+        setShowAlert: (state, action) => {
+            state.showAlert = true;
             state.alertText = action.payload.text;
             state.alertType = action.payload.type;
+        },
+        setHideAlert: (state, action) => {
+            state.showAlert = false;
+            state.alertText = "";
+            state.alertType = "";
         },
         setUser: (state, action) => {
             state.user = action.payload;
@@ -32,7 +38,13 @@ const appSlice = createSlice({
     },
 });
 
-export const { setLoading, setAlert, setUser, setToken, setTheme } =
-    appSlice.actions;
+export const {
+    setLoading,
+    setUser,
+    setToken,
+    setTheme,
+    setHideAlert,
+    setShowAlert,
+} = appSlice.actions;
 
 export default appSlice.reducer;

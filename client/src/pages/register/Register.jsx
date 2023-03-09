@@ -12,8 +12,12 @@ import {
     setUser,
     setLoading,
     setToken,
-    setAlert,
+    setShowAlert,
+    setHideAlert,
 } from "../../redux/slices/appSlice";
+
+import { setAlertWithTimeout, stopAlert } from "../../redux/actions";
+
 import ThemeSwitch from "../../components/ThemeSwitch/ThemeSwitch";
 
 const Register = () => {
@@ -22,9 +26,6 @@ const Register = () => {
     const dispatch = useDispatch();
     const appSlice = useSelector((state) => state.app);
 
-    //test
-
-    console.log(appSlice);
     //isMember
     const [isMember, setIsMember] = useState(false);
 
@@ -37,7 +38,6 @@ const Register = () => {
     });
 
     const { username, email, password, confirmPassword } = values;
-
     //handle change
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -47,6 +47,8 @@ const Register = () => {
     //handle submit
     const handleSubmit = (e) => {
         e.preventDefault();
+
+        setAlertWithTimeout(dispatch, "Please wait...", "info", 2000);
     };
 
     return (
