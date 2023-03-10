@@ -49,6 +49,12 @@ export const RegisterContainer = styled.div`
             margin-bottom: 1rem;
             cursor: pointer;
         }
+        //disabled button
+
+        .submitButton:disabled {
+            background-color: ${(props) => props.theme.disabledColor};
+            cursor: not-allowed;
+        }
 
         .isMember {
             display: flex;

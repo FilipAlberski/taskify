@@ -23,6 +23,7 @@ const lightTheme = {
     background2: "#fff", //white
     background3: "#dddddd", //lightgray
     specialColor: "#0077b6",
+    disabledColor: "#6baecf",
     white: "#fff",
 
     bigShadow: "8px 8px 64px 0px rgba(66, 68, 90, 1)",
@@ -34,6 +35,7 @@ const darkTheme = {
     background2: "#161b22", //lightdarkgray
     background3: "#212121", //darkergray
     specialColor: "#9a02b9",
+    disabledColor: "#3a084b",
     white: "#fff",
 
     bigShadow: "8px 8px 64px 0px rgba(102, 102, 102, 1)",

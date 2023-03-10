@@ -47,6 +47,7 @@ const Register = () => {
     //handle submit
     const handleSubmit = (e) => {
         e.preventDefault();
+        dispatch(setLoading(true));
 
         if (!email || !password || (!isMember && !username)) {
             setAlertWithTimeout(dispatch, "Please fill all fields", "danger");
@@ -64,6 +65,12 @@ const Register = () => {
             email,
             password,
         };
+
+        if (isMember) {
+            console.log("already a member");
+        } else {
+            console.log("new member");
+        }
 
         dispatch(setLoading(true));
     };
@@ -128,6 +135,7 @@ const Register = () => {
                     type="submit"
                     className="submitButton"
                     onClick={handleSubmit}
+                    disabled={appSlice.isLoading}
                 >
                     {isMember ? "Login" : "Create Account"}
                 </button>
