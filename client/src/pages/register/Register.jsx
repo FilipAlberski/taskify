@@ -5,7 +5,7 @@ import Logo from "../../components/Logo/Logo";
 import FormRow from "../../components/formRow/FormRow";
 import Alert from "../../components/alert/Alert";
 //react
-import { useState } from "react";
+import { useEffect, useState } from "react";
 //redux
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -64,10 +64,13 @@ const Register = () => {
             email,
             password,
         };
-        console.log(isMember);
-
-        dispatch(setLoading(false));
     };
+
+    useEffect(() => {
+        axios.get("/api/apitest").then((res) => {
+            console.log(res.data.message);
+        });
+    }, []);
 
     return (
         <RegisterContainer>

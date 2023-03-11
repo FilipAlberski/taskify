@@ -16,8 +16,8 @@ app.use(express.json());
 
 app.use(cors());
 
-app.get("/api/v1/", (req, res) => {
-    res.send("Hello World");
+app.get("/api/v1/apitest", (req, res) => {
+    res.status(200).json({ message: "API is working" });
 });
 
 //routes

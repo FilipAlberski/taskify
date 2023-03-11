@@ -1,4 +1,10 @@
-import { setHideAlert, setShowAlert } from "./slices/appSlice";
+import {
+    setHideAlert,
+    setShowAlert,
+    REGISTER_USER_BEGIN,
+    REGISTER_USER_SUCCESS,
+} from "./slices/appSlice";
+import axios from "axios";
 
 export const setAlertWithTimeout = (dispatch, text, type, timeout) => {
     dispatch(setShowAlert({ text, type }));
@@ -11,13 +17,19 @@ export const stopAlert = () => {
     dispatch(setHideAlert());
 };
 
-export const registerUser2 = (user) => async (dispatch) => {
-    try {
-        const res = await axios.post("/api/users", user);
-        dispatch(setAlertWithTimeout(dispatch, res.data.msg, "success", 5000));
-    } catch (err) {
-        dispatch(
-            setAlertWithTimeout(dispatch, err.response.data.msg, "error", 5000)
-        );
-    }
-};
+//register user
+
+export const register =
+    ({ name, email, password }) =>
+    async (dispatch) => {
+        dispatch(REGISTER_USER_BEGIN());
+
+        try {
+            const response = await axios.post("/api/v1/auth/register", {
+                name,
+                email,
+                password,
+            });
+            dispatch(REGISTER_USER_SUCCESS());
+        } catch (err) {}
+    };

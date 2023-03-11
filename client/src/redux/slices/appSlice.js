@@ -35,6 +35,12 @@ const appSlice = createSlice({
         setTheme: (state, action) => {
             state.theme = action.payload;
         },
+        REGISTER_USER_BEGIN: (state, action) => {
+            state.isLoading = true;
+        },
+        REGISTER_USER_SUCCESS: (state, action) => {
+            state.isLoading = false;
+        },
     },
 });
 
@@ -45,6 +51,8 @@ export const {
     setTheme,
     setHideAlert,
     setShowAlert,
+    REGISTER_USER_BEGIN,
+    REGISTER_USER_SUCCESS,
 } = appSlice.actions;
 
 export default appSlice.reducer;
