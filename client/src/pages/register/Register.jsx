@@ -1,11 +1,11 @@
 //components
+import ThemeSwitch from "../../components/ThemeSwitch/ThemeSwitch";
 import { RegisterContainer } from "./Register.styled";
 import Logo from "../../components/Logo/Logo";
 import FormRow from "../../components/formRow/FormRow";
 import Alert from "../../components/alert/Alert";
 //react
 import { useState } from "react";
-
 //redux
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -15,10 +15,9 @@ import {
     setShowAlert,
     setHideAlert,
 } from "../../redux/slices/appSlice";
-
 import { setAlertWithTimeout, stopAlert } from "../../redux/actions";
-
-import ThemeSwitch from "../../components/ThemeSwitch/ThemeSwitch";
+//axios and other
+import axios from "axios";
 
 const Register = () => {
     //redux
@@ -45,7 +44,7 @@ const Register = () => {
     };
 
     //handle submit
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         dispatch(setLoading(true));
 
@@ -61,18 +60,13 @@ const Register = () => {
         }
 
         const currentUser = {
-            name: username,
+            name: isMember ? "" : username,
             email,
             password,
         };
+        console.log(isMember);
 
-        if (isMember) {
-            console.log("already a member");
-        } else {
-            console.log("new member");
-        }
-
-        dispatch(setLoading(true));
+        dispatch(setLoading(false));
     };
 
     return (
