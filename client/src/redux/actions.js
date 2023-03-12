@@ -17,6 +17,16 @@ export const stopAlert = () => {
     dispatch(setHideAlert());
 };
 
+export const test = () => async (dispatch) => {
+    try {
+        const response = await axios.get("/api/apitest");
+        setAlertWithTimeout(dispatch, response.data.message, "success");
+        console.log(response.data.message);
+    } catch (err) {
+        console.log(err);
+    }
+};
+
 //register user
 
 export const register =

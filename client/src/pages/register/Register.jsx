@@ -15,9 +15,12 @@ import {
     setShowAlert,
     setHideAlert,
 } from "../../redux/slices/appSlice";
-import { setAlertWithTimeout, stopAlert } from "../../redux/actions";
+import { setAlertWithTimeout, stopAlert, test } from "../../redux/actions";
 //axios and other
 import axios from "axios";
+
+//utils
+import apitest from "../../utils/apiTest";
 
 const Register = () => {
     //redux
@@ -50,12 +53,13 @@ const Register = () => {
 
         if (!email || !password || (!isMember && !username)) {
             setAlertWithTimeout(dispatch, "Please fill all fields", "danger");
-
+            dispatch(setLoading(false));
             return;
         }
 
         if (!isMember && password !== confirmPassword) {
             setAlertWithTimeout(dispatch, "Passwords do not match", "danger");
+            dispatch(setLoading(false));
             return;
         }
 
@@ -67,9 +71,7 @@ const Register = () => {
     };
 
     useEffect(() => {
-        axios.get("/api/apitest").then((res) => {
-            console.log(res.data.message);
-        });
+        dispatch(test());
     }, []);
 
     return (
