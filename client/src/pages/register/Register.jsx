@@ -15,7 +15,12 @@ import {
     setShowAlert,
     setHideAlert,
 } from "../../redux/slices/appSlice";
-import { setAlertWithTimeout, stopAlert, test } from "../../redux/actions";
+import {
+    setAlertWithTimeout,
+    stopAlert,
+    test,
+    registerUser,
+} from "../../redux/actions";
 //axios and other
 import axios from "axios";
 
@@ -68,6 +73,12 @@ const Register = () => {
             email,
             password,
         };
+
+        if (isMember) {
+        } else {
+            dispatch(registerUser(currentUser));
+            //clear form
+        }
     };
 
     useEffect(() => {

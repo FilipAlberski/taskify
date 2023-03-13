@@ -29,7 +29,7 @@ const register = async (req, res) => {
 
     res.status(StatusCodes.CREATED).json({
         success: true,
-        data: user,
+        user: user,
         token,
     });
 };

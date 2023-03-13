@@ -38,9 +38,7 @@ const appSlice = createSlice({
         REGISTER_USER_BEGIN: (state, action) => {
             state.isLoading = true;
         },
-        REGISTER_USER_SUCCESS: (state, action) => {
-            state.isLoading = false;
-        },
+        //dispatch(REGISTER_USER_SUCCESS({ user, token }));
     },
 });
 
