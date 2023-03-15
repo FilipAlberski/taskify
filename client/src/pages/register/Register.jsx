@@ -8,6 +8,10 @@ import Alert from "../../components/alert/Alert";
 import { useEffect, useState } from "react";
 //redux
 import { useDispatch, useSelector } from "react-redux";
+//react dom
+
+import { useNavigate } from "react-router-dom";
+
 import {
     setUser,
     setLoading,
@@ -15,12 +19,7 @@ import {
     setShowAlert,
     setHideAlert,
 } from "../../redux/slices/appSlice";
-import {
-    setAlertWithTimeout,
-    stopAlert,
-    test,
-    registerUser,
-} from "../../redux/actions";
+import { setAlertWithTimeout, registerUser } from "../../redux/actions";
 //axios and other
 import axios from "axios";
 
@@ -43,6 +42,19 @@ const Register = () => {
         password: "",
         confirmPassword: "",
     });
+
+    // navigate if user is logged in
+    const navigate = useNavigate();
+    const { user } = appSlice;
+    useEffect(() => {
+        if (user) {
+            setTimeout(() => {
+                navigate("/");
+            }, 1000);
+        }
+    }, [user, navigate]);
+
+    //destructure values
 
     const { username, email, password, confirmPassword } = values;
     //handle change
@@ -75,15 +87,12 @@ const Register = () => {
         };
 
         if (isMember) {
+            dispatch(setLoading(false));
         } else {
             dispatch(registerUser(currentUser));
-            //clear form
+            dispatch(setLoading(false));
         }
     };
-
-    useEffect(() => {
-        dispatch(test());
-    }, []);
 
     return (
         <RegisterContainer>
