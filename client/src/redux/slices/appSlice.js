@@ -1,6 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { useEffect } from "react";
 
+const token = localStorage.getItem("token");
+const user = JSON.parse(localStorage.getItem("user"));
+
 const appSlice = createSlice({
     name: "app",
     initialState: {
@@ -8,8 +11,8 @@ const appSlice = createSlice({
         showAlert: false,
         alertText: "",
         alertType: "",
-        user: null,
-        token: null,
+        user: user || null,
+        token: token || null,
         theme: "light",
     },
     reducers: {

@@ -6,6 +6,10 @@ import {
     setToken,
     setLoading,
 } from "./slices/appSlice";
+import {
+    addUserToLocalStorage,
+    removeUserFromLocalStorage,
+} from "./utils/userLocalStorage";
 import axios from "axios";
 
 export const setAlertWithTimeout = (dispatch, text, type, timeout) => {
@@ -19,15 +23,6 @@ export const stopAlert = () => {
     dispatch(setHideAlert());
 };
 
-export const test = () => async (dispatch) => {
-    try {
-        const response = await axios.get("/api/apitest");
-        setAlertWithTimeout(dispatch, response.data.message, "success");
-        console.log(response.data.message);
-    } catch (err) {
-        console.log(err);
-    }
-};
 const REGISTER_USER_SUCCESS = (user, token) => async (dispatch) => {
     dispatch(setUser(user));
     dispatch(setToken(token));
@@ -57,9 +52,10 @@ export const registerUser = (currnetUser) => async (dispatch) => {
     try {
         const response = await axios.post("/api/auth/register", currnetUser);
         const { user, token } = response.data;
-        dispatch(REGISTER_USER_SUCCESS(user, token));
 
-        //localstorage later
+        //add user to local storage
+        dispatch(addUserToLocalStorage(user, token));
+        dispatch(REGISTER_USER_SUCCESS(user, token));
     } catch (err) {
         dispatch(REGISTER_USER_ERROR(err.response.data.msg));
     }

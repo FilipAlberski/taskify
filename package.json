@@ -6,8 +6,8 @@
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "dev": "concurrently \"cd client && yarn dev\" \"cd server && nodemon index.js\"",
-        "installall": "cd client && yarn install && cd ../server && yarn install && cd .. && yarn install",
-        "npminstall": "cd client && npm install && cd ../server && npm install && cd .. && npm install"
+        "yarninstallall": "cd client && yarn install && cd ../server && yarn install && cd .. && yarn install",
+        "npminstallall": "cd client && npm install && cd ../server && npm install && cd .. && npm install"
     },
     "keywords": [],
     "author": "",
