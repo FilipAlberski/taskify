@@ -7,11 +7,14 @@ const ThemeSwitch = () => {
     const theme = useSelector((state) => state.app.theme);
     const dispatch = useDispatch();
 
+    // localStorage.setItem("theme", theme);
+
     const [isToggled, setIsToggled] = useState(theme === "light");
 
     const toggleTheme = () => {
         setIsToggled(!isToggled);
         dispatch(setTheme(isToggled ? "dark" : "light"));
+        localStorage.setItem("theme", isToggled ? "dark" : "light");
     };
 
     return (

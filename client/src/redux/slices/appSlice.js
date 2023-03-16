@@ -3,6 +3,7 @@ import { useEffect } from "react";
 
 const token = localStorage.getItem("token");
 const user = JSON.parse(localStorage.getItem("user"));
+const theme = localStorage.getItem("theme");
 
 const appSlice = createSlice({
     name: "app",
@@ -13,7 +14,7 @@ const appSlice = createSlice({
         alertType: "",
         user: user || null,
         token: token || null,
-        theme: "light",
+        theme: theme || "light",
     },
     reducers: {
         setLoading: (state, action) => {
