@@ -76,12 +76,8 @@ UserSchema.methods.toJSON = function () {
 };
 
 UserSchema.methods.comparePassword = async function (candidatePassword) {
-    try {
-        const isMatch = await bcrypt.compare(candidatePassword, this.password);
-        return isMatch;
-    } catch (err) {
-        throw new Error("Error comparing password");
-    }
+    const isMatch = await bcrypt.compare(candidatePassword, this.password);
+    return isMatch;
 };
 
 module.exports = mongoose.model("User", UserSchema);
