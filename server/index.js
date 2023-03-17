@@ -5,12 +5,21 @@ const errorHandlerMiddleware = require("./middleware/errorHandler");
 const authRoutes = require("./routes/authRoutes");
 const notFoundMiddleware = require("./middleware/notFound");
 const cors = require("cors");
+const morgan = require("morgan");
 
 //connectDB
 
 const connectDB = require("./db/connectDB");
 
+//app
+
 const app = express();
+
+//middleware
+
+if (process.env.NODE_ENV !== "production") {
+    app.use(morgan("dev"));
+}
 
 app.use(express.json());
 
