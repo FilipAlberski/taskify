@@ -42,8 +42,29 @@ const login = async (req, res, next) => {
 
     if (!email || !password) {
         res.status(StatusCodes.BAD_REQUEST);
-        throw new Error("Please provide an email and password");
+        throw new Error("Please provide email and password");
     }
+
+    const user = await User.findOne({ email }).select("+password");
+
+    if (!user) {
+        res.status(StatusCodes.BAD_REQUEST);
+        throw new Error("Invalid credentials");
+    }
+
+    const isMatch = await user.comparePassword(password);
+
+    if (!isMatch) {
+        res.status(StatusCodes.BAD_REQUEST);
+        throw new Error("Invalid credentials");
+    }
+
+    const token = await user.getSignedJwtToken();
+
+    res.status(StatusCodes.OK).json({
+        user,
+        token,
+    });
 };
 
 module.exports = {

@@ -20,7 +20,6 @@ const UserSchema = new Schema(
             required: [true, "Please enter your password"],
             minLength: [6, "Password must be at least 6 characters long"],
             select: false,
-            trim: true,
         },
         role: {
             type: String,
