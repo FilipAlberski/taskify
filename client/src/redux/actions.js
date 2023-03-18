@@ -61,3 +61,8 @@ export const registerUser = (currnetUser) => async (dispatch) => {
     }
     //clear alert
 };
+
+export const loginUser = (currnetUser) => (dispatch) => {
+    try {
+    } catch (err) {}
+};
