@@ -19,7 +19,11 @@ import {
     setShowAlert,
     setHideAlert,
 } from "../../redux/slices/appSlice";
-import { setAlertWithTimeout, registerUser } from "../../redux/actions";
+import {
+    setAlertWithTimeout,
+    registerUser,
+    loginUser,
+} from "../../redux/actions";
 //axios and other
 import axios from "axios";
 
@@ -87,6 +91,7 @@ const Register = () => {
         };
 
         if (isMember) {
+            dispatch(loginUser(currentUser));
             dispatch(setLoading(false));
         } else {
             dispatch(registerUser(currentUser));

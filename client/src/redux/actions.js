@@ -45,6 +45,34 @@ const REGISTER_USER_ERROR = (errorMsg) => async (dispatch) => {
         dispatch(setHideAlert());
     }, 5000);
 };
+
+const LOGIN_USER_BEGIN = () => async (dispatch) => {
+    dispatch(setLoading(true));
+};
+
+const LOGIN_USER_SUCCESS = (user, token) => async (dispatch) => {
+    dispatch(setUser(user));
+    dispatch(setToken(token));
+    dispatch(
+        setShowAlert({
+            text: "User logged in successfully, redirecting",
+            type: "success",
+        })
+    );
+
+    setTimeout(() => {
+        dispatch(setHideAlert());
+    }, 10000);
+};
+const LOGIN_USER_ERROR = (errorMsg) => async (dispatch) => {
+    dispatch(setLoading(false));
+    dispatch(setShowAlert({ text: errorMsg, type: "error" }));
+
+    setTimeout(() => {
+        dispatch(setHideAlert());
+    }, 5000);
+};
+
 //register user
 
 export const registerUser = (currnetUser) => async (dispatch) => {
@@ -62,7 +90,16 @@ export const registerUser = (currnetUser) => async (dispatch) => {
     //clear alert
 };
 
-export const loginUser = (currnetUser) => (dispatch) => {
+export const loginUser = (currnetUser) => async (dispatch) => {
+    dispatch(LOGIN_USER_BEGIN());
+
     try {
-    } catch (err) {}
+        const response = await axios.post("/api/auth/login", currnetUser);
+        const { user, token } = response.data;
+
+        dispatch(addUserToLocalStorage(user, token));
+        dispatch(LOGIN_USER_SUCCESS(user, token));
+    } catch (error) {
+        dispatch(LOGIN_USER_ERROR(error.response.data.msg));
+    }
 };
