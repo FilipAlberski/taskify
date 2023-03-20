@@ -95,7 +95,6 @@ const Register = () => {
             dispatch(setLoading(false));
         } else {
             dispatch(registerUser(currentUser));
-
             dispatch(setLoading(false));
         }
     };

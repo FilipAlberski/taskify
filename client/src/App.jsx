@@ -22,7 +22,7 @@ function App() {
             <GlobalStyle />
             <BrowserRouter>
                 <Routes>
-                    <Route path="/" element={<Dashboard />} />
+                    <Route path="/" element={<div>dashboard</div>} />
                     <Route path="/landing" element={<Landing />} />
                     <Route path="/register" element={<Register />} />
                     <Route path="*" element={<Error />} />
