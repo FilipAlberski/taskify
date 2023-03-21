@@ -6,7 +6,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 //Pages
-import Dashboard from "./pages/dashboard/Dashboard";
+import { CreateTask, Tasks, Profile, Stats } from "./pages/dashboard";
+
 import Landing from "./pages/landing/Landing";
 import Error from "./pages/error/Error";
 import Register from "./pages/register/Register";

@@ -45,6 +45,13 @@ const UserSchema = new Schema(
                 ref: "Project",
             },
         ],
+        pageSettings: {
+            theme: {
+                type: String,
+                enum: ["light", "dark"],
+                default: "light",
+            },
+        },
     },
     { timestamps: true }
 );
