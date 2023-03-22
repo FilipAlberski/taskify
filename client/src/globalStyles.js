@@ -7,10 +7,16 @@ const GlobalStyle = createGlobalStyle`
     font-family: Open-Sans, Helvetica, Sans-Serif;
     
   }
+  
+  
   *{
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+  }
+  #root{
+    min-height: 100vh;
+    min-width: 100vw;
   }
   :root {
  

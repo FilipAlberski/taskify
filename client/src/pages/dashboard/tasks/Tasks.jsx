@@ -1,7 +1,8 @@
 import React from "react";
+import { TasksContainer } from "./tasks.styled";
 
 const Tasks = () => {
-    return <div>Tasks</div>;
+    return <TasksContainer>Tasks</TasksContainer>;
 };
 
 export default Tasks;

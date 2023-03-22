@@ -1,5 +1,5 @@
 import React from "react";
-import { SmallSidebarContainer } from "./SmallSidebar.styled";
+import { SmallSidebarContainer } from "./Sidebar.styled";
 
 const SmallSidebar = () => {
     return <SmallSidebarContainer>sidebar</SmallSidebarContainer>;

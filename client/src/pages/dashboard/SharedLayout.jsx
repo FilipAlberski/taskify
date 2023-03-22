@@ -1,18 +1,18 @@
 import React from "react";
 import { Outlet, Link } from "react-router-dom";
 import Navbar from "../../components/navbar/Navbar";
-import BigSidebar from "../../components/bigSidebar/BigSidebar";
-import SmallSidebar from "../../components/smallSidebar/SmallSidebar";
+
+import Sidebar from "../../components/sidebar/Sidebar";
 
 import { StyledLayout } from "./SharedLayout.styled";
 const SharedLayout = () => {
     return (
-        <StyledLayout>
+        <StyledLayout className="layout">
             <Navbar />
             <main className="dashboard">
-                <SmallSidebar />
-                <BigSidebar />
-                <div>
+                <Sidebar />
+
+                <div className="outlet">
                     <Outlet />
                 </div>
             </main>
