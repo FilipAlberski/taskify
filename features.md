@@ -5,7 +5,7 @@ overall:
 -pageSettings from DB  
 -protected route on frontend ✅  
 -protected route on backend
-
+-resizable sidebar
 Page /register
 
 -login ✅  

@@ -6,10 +6,11 @@ const GlobalStyle = createGlobalStyle`
     
     font-family: Open-Sans, Helvetica, Sans-Serif;
     
+    
   }
   
   
-  *{
+  *,html,body{
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -18,6 +19,7 @@ const GlobalStyle = createGlobalStyle`
     min-height: 100vh;
     min-width: 100vw;
   }
+  
   :root {
  
 }

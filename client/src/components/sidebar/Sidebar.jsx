@@ -1,8 +1,13 @@
 import React from "react";
-import { SmallSidebarContainer } from "./Sidebar.styled";
+import { SidebarContainer } from "./Sidebar.styled";
 
 const SmallSidebar = () => {
-    return <SmallSidebarContainer>sidebar</SmallSidebarContainer>;
+    return (
+        <SidebarContainer>
+            <div className="sidebar">sidebaree</div>
+            <div className="sidebar-resizer"></div>
+        </SidebarContainer>
+    );
 };
 
 export default SmallSidebar;
