@@ -28,7 +28,14 @@ const register = async (req, res) => {
         email,
         password,
     });
+
     const token = await user.getSignedJwtToken();
+
+    // Set the token as an HTTP-only cookie
+    res.cookie("token", token, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+    });
 
     res.status(StatusCodes.CREATED).json({
         success: true,
@@ -60,6 +67,11 @@ const login = async (req, res, next) => {
     }
 
     const token = await user.getSignedJwtToken();
+
+    res.cookie("token", token, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+    });
 
     res.status(StatusCodes.OK).json({
         user,
