@@ -2,7 +2,9 @@ Features
 
 overall:
 
--pageSettings from DB
+-pageSettings from DB  
+-protected route on frontend ✅  
+-protected route on backend
 
 Page /register
 

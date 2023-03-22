@@ -39,7 +39,7 @@ const REGISTER_USER_SUCCESS = (user, token) => async (dispatch) => {
 };
 const REGISTER_USER_ERROR = (errorMsg) => async (dispatch) => {
     dispatch(setLoading(false));
-    dispatch(setShowAlert({ text: errorMsg, type: "error" }));
+    dispatch(setShowAlert({ text: errorMsg, type: "danger" }));
 
     setTimeout(() => {
         dispatch(setHideAlert());
@@ -66,7 +66,7 @@ const LOGIN_USER_SUCCESS = (user, token) => async (dispatch) => {
 };
 const LOGIN_USER_ERROR = (errorMsg) => async (dispatch) => {
     dispatch(setLoading(false));
-    dispatch(setShowAlert({ text: errorMsg, type: "error" }));
+    dispatch(setShowAlert({ text: errorMsg, type: "danger" }));
 
     setTimeout(() => {
         dispatch(setHideAlert());

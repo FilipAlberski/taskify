@@ -13,6 +13,24 @@ export const RegisterContainer = styled.div`
     justify-content: center;
     transition: all 0.5s ease;
     //shadow
+
+    .alert.alert-danger {
+        color: red;
+        background-color: ${(props) => props.theme.background};
+        padding: 1rem;
+        border-radius: 0.5rem;
+        font-size: 2rem;
+        text-align: center;
+    }
+
+    .alert.alert-success {
+        color: green;
+        background-color: ${(props) => props.theme.background};
+        padding: 1rem;
+        border-radius: 0.5rem;
+        font-size: 2rem;
+        text-align: center;
+    }
     .title {
         padding-bottom: 1rem;
     }

@@ -108,14 +108,16 @@ const Register = () => {
 
             <form>
                 <div className="title">
-                    <h1>{isMember ? "Login" : "Register"}</h1>
+                    {appSlice.showAlert ? (
+                        <Alert
+                            alertType={appSlice.alertType}
+                            alertText={appSlice.alertText}
+                        />
+                    ) : (
+                        <h1>{isMember ? "Login" : "Register"}</h1>
+                    )}
                 </div>
-                {appSlice.showAlert && (
-                    <Alert
-                        alertType={appSlice.alertType}
-                        alertText={appSlice.alertText}
-                    />
-                )}
+
                 <div className="inputs">
                     {!isMember && (
                         <FormRow
