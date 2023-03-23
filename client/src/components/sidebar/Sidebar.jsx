@@ -1,11 +1,17 @@
 import React, { useState } from "react";
 import { SidebarContainer } from "./Sidebar.styled";
+import { useSelector, useDispatch } from "react-redux";
+import { SET_SIDEBAR_WIDTH } from "../../redux/slices/appSlice";
 
 const SmallSidebar = () => {
-    const [sidebarWidth, setSidebarWidth] = useState(100);
+    const dispatch = useDispatch();
+    const sidebarWidth = useSelector(
+        (state) => state.app.pageSettings.sidebarWidth
+    );
 
     const handleResize = (event) => {
-        setSidebarWidth(event.clientX);
+        dispatch(SET_SIDEBAR_WIDTH(event.clientX));
+        //setSidebarWidth(event.clientX);
     };
 
     return (

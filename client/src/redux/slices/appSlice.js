@@ -4,6 +4,7 @@ import { useEffect } from "react";
 const token = localStorage.getItem("token");
 const user = JSON.parse(localStorage.getItem("user"));
 const theme = localStorage.getItem("theme");
+const sidebar_Width = localStorage.getItem("sidebarWidth");
 
 const appSlice = createSlice({
     name: "app",
@@ -15,6 +16,9 @@ const appSlice = createSlice({
         user: user || null,
         token: token || null,
         theme: theme || "light",
+        pageSettings: {
+            sidebarWidth: sidebar_Width || 60,
+        },
     },
     reducers: {
         setLoading: (state, action) => {
@@ -42,6 +46,11 @@ const appSlice = createSlice({
         REGISTER_USER_BEGIN: (state, action) => {
             state.isLoading = true;
         },
+        SET_SIDEBAR_WIDTH: (state, action) => {
+            state.pageSettings.sidebarWidth = action.payload;
+            localStorage.setItem("sidebarWidth", action.payload);
+        },
+
         //dispatch(REGISTER_USER_SUCCESS({ user, token }));
     },
 });
@@ -55,6 +64,7 @@ export const {
     setShowAlert,
     REGISTER_USER_BEGIN,
     REGISTER_USER_SUCCESS,
+    SET_SIDEBAR_WIDTH,
 } = appSlice.actions;
 
 export default appSlice.reducer;
