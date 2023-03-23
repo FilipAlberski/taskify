@@ -1,6 +1,7 @@
 import React from "react";
 import { Outlet, Link } from "react-router-dom";
 import Navbar from "../../components/navbar/Navbar";
+import { useEffect } from "react";
 
 import Sidebar from "../../components/sidebar/Sidebar";
 

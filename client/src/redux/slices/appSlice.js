@@ -1,10 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { useEffect } from "react";
 
+const pageSettings = JSON.parse(localStorage.getItem("pageSettings")) || {};
+
 const token = localStorage.getItem("token");
 const user = JSON.parse(localStorage.getItem("user"));
 const theme = localStorage.getItem("theme");
-const sidebar_Width = localStorage.getItem("sidebarWidth");
+const sidebar_Width = pageSettings.sidebarWidth;
 
 const appSlice = createSlice({
     name: "app",
@@ -48,7 +50,10 @@ const appSlice = createSlice({
         },
         SET_SIDEBAR_WIDTH: (state, action) => {
             state.pageSettings.sidebarWidth = action.payload;
-            localStorage.setItem("sidebarWidth", action.payload);
+            const pageSettings =
+                JSON.parse(localStorage.getItem("pageSettings")) || {};
+            pageSettings.sidebarWidth = action.payload;
+            localStorage.setItem("pageSettings", JSON.stringify(pageSettings));
         },
 
         //dispatch(REGISTER_USER_SUCCESS({ user, token }));
