@@ -5,7 +5,7 @@ overall:
 -pageSettings from DB  
 -protected route on frontend ✅  
 -protected route on backend
--resizable sidebar
+-resizable sidebar ✅  
 Page /register
 
 -login ✅  
@@ -13,16 +13,20 @@ Page /register
 -restart password
 -colored alerts from backend(wrong password or something)
 
-Navbar
+Sidebar
 
--Home button (of course)  
--logout button  
--profile button  
--search button  
+-Home button (of course)
+-create task
+-admin (hard one i think)
 -tasks button (same as home)  
 -projects button
 
+navbar:
+
 -navbar on every page
+-logout button  
+-profile button  
+-search form
 
 Page /main
 
