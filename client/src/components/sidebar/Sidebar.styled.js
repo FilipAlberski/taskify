@@ -15,11 +15,11 @@ export const SidebarContainer = styled.div`
         position: absolute;
         right: 0;
         top: 0;
-        width: 10px;
+        width: 1.5px;
         height: 100%;
         cursor: col-resize;
-        background-color: white;
-        opacity: 0.2;
+        background-color: ${(props) => props.theme.specialColor};
+        opacity: 1;
         z-index: 1;
     }
 
@@ -34,9 +34,9 @@ export const SidebarContainer = styled.div`
     .sidebar-resizer:after {
         content: "";
         position: absolute;
-        right: -5px;
+        right: -2px;
         top: 0;
-        width: 10px;
+        width: 4px;
         height: 100%;
         cursor: col-resize;
         z-index: 2;
