@@ -6,4 +6,5 @@ export const NavbarContainer = styled.div`
     height: 55px;
     background-color: red;
     width: 100%;
+    background-color: ${(props) => props.theme.background2};
 `;

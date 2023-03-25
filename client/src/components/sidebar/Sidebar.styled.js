@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const SidebarContainer = styled.div`
-    background-color: blue;
+    background-color: ${(props) => props.theme.background};
     width: ${({ sidebarWidth }) => sidebarWidth}px;
     min-width: 60px;
     max-width: 300px;
