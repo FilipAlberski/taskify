@@ -36,13 +36,12 @@ const UserSchema = new Schema(
         lastName: {
             type: String,
             minLength: [3, "Last name must be at least 3 characters long"],
-
             default: "lastname",
         },
-        projects: [
+        permissions: [
             {
-                type: mongoose.Types.ObjectId,
-                ref: "Project",
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "Permission",
             },
         ],
         pageSettings: {
