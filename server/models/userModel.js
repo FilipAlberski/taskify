@@ -21,10 +21,15 @@ const UserSchema = new Schema(
             minLength: [6, "Password must be at least 6 characters long"],
             select: false,
         },
-        role: {
-            type: String,
-            enum: ["superAdmin", "user"],
-            default: "user",
+        roles: {
+            type: [String],
+            enum: [
+                "superAdmin",
+                "projectAdmin",
+                "projectMember",
+                "issueViewer",
+            ],
+            default: ["projectMember"],
         },
         name: {
             type: String,
@@ -38,7 +43,19 @@ const UserSchema = new Schema(
             minLength: [3, "Last name must be at least 3 characters long"],
             default: "lastname",
         },
-
+        projects: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: "Project",
+                default: ["main"], // set default project ID to "main"
+            },
+        ],
+        tasks: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: "Task",
+            },
+        ],
         pageSettings: {
             theme: {
                 type: String,

@@ -35,3 +35,9 @@ Page /main
 ---maybe create diffrent dashboards of tasks with diffrent filters (hard one, i dont know right now how to do this, will learn it later :)
 
 -After clicking task he will navigate to the other page with only this task
+
+permissions:
+
+-global permissions like user have permission to the main project
+-project permissions, user have permissions to the diffrent projects
+-issue permissions, user that dont have permission to the project have permission to the task in this project

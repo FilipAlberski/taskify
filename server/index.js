@@ -3,6 +3,7 @@ const express = require("express");
 const dotenv = require("dotenv").config();
 const errorHandlerMiddleware = require("./middleware/errorHandler");
 const authRoutes = require("./routes/authRoutes");
+const projectRoutes = require("./routes/projectRoutes");
 const notFoundMiddleware = require("./middleware/notFound");
 const cors = require("cors");
 const morgan = require("morgan");
@@ -32,6 +33,7 @@ app.get("/api/v1/apitest", (req, res) => {
 //routes
 
 app.use("/api/v1/auth", authRoutes);
+app.use("/api/v1/projects", projectRoutes);
 
 //error handler
 app.use(notFoundMiddleware);
