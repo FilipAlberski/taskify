@@ -23,7 +23,7 @@ const UserSchema = new Schema(
         },
         role: {
             type: String,
-            enum: ["admin", "user"],
+            enum: ["superAdmin", "user"],
             default: "user",
         },
         name: {
@@ -38,12 +38,7 @@ const UserSchema = new Schema(
             minLength: [3, "Last name must be at least 3 characters long"],
             default: "lastname",
         },
-        permissions: [
-            {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: "Permission",
-            },
-        ],
+
         pageSettings: {
             theme: {
                 type: String,

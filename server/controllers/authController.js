@@ -31,6 +31,8 @@ const register = async (req, res) => {
 
     const token = await user.getSignedJwtToken();
 
+    user.permissions.push(permission._id);
+
     // Set the token as an HTTP-only cookie
     res.cookie("token", token, {
         httpOnly: true,
