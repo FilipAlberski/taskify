@@ -8,6 +8,9 @@ const notFoundMiddleware = require("./middleware/notFound");
 const cors = require("cors");
 const morgan = require("morgan");
 
+const createDefaultProject = require("./utils/start/createDefaultProject");
+
+console.log(createDefaultProject);
 //connectDB
 
 const connectDB = require("./db/connectDB");
@@ -43,6 +46,8 @@ const port = process.env.PORT || 5000;
 const start = async () => {
     try {
         const connection = await connectDB(process.env.MONGO_URI);
+        //create default project
+        await createDefaultProject();
         app.listen(port, () => {
             console.log(`Server running on port ${port}`);
         });
