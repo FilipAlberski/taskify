@@ -20,11 +20,10 @@ async function createDefaultProject() {
             await mainProject.save();
 
             // Create the root user
-            const salt = await bcrypt.genSalt(10);
-            const hashedPassword = await bcrypt.hash("rootroot", salt);
+
             const rootUser = new User({
                 email: "root@root.com",
-                password: hashedPassword,
+                password: "rootroot",
                 roles: [],
                 name: "Root",
                 projects: [mainProject._id],
