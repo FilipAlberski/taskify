@@ -5,7 +5,6 @@ const TaskSchema = new Schema(
     {
         taskId: {
             type: String,
-            required: true,
             unique: true,
         },
         name: {
@@ -34,6 +33,12 @@ const TaskSchema = new Schema(
             type: Schema.Types.ObjectId,
             ref: "Project",
         },
+        coworkers: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: "User",
+            },
+        ],
         comments: [
             {
                 text: {
@@ -55,18 +60,17 @@ const TaskSchema = new Schema(
     { timestamps: true }
 );
 
-// Add a pre-save hook to generate the task ID based on the project name and the number of tasks in the project
 TaskSchema.pre("save", async function (next) {
     const task = this;
     const project = await mongoose.model("Project").findById(task.project);
     if (!project) {
         return next(new Error("Project not found"));
     }
-    const taskId = `${project.name}-${project.tasks.length + 1}`;
-    task.taskId = taskId;
+    const tasksInProject = await mongoose
+        .model("Task")
+        .countDocuments({ project: project._id });
+    task.taskId = `${project.name}-${tasksInProject + 1}`;
     next();
 });
-
-//export
 
 module.exports = mongoose.model("Task", TaskSchema);

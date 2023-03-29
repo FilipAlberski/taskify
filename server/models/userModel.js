@@ -23,13 +23,8 @@ const UserSchema = new Schema(
         },
         roles: {
             type: [String],
-            enum: [
-                "superAdmin",
-                "projectAdmin",
-                "projectMember",
-                "issueViewer",
-            ],
-            default: ["projectMember"],
+            enum: ["superAdmin", "user"],
+            default: ["user"],
         },
         name: {
             type: String,
