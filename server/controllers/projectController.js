@@ -33,4 +33,16 @@ const createProject = async (req, res) => {
     }
 };
 
-module.exports = { createProject };
+// show all projects
+
+const showAllProjects = async (req, res) => {
+    try {
+        const projects = await Project.find().lean();
+
+        res.status(200).json({ success: true, data: projects });
+    } catch (error) {
+        res.status(500).json({ success: false, error: error.message });
+    }
+};
+
+module.exports = { createProject, showAllProjects };
