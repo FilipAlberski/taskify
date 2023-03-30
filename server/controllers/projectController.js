@@ -3,6 +3,16 @@ const Project = require("../models/projectModel");
 const createProject = async (req, res) => {
     const { name, description, admin, memberEmails } = req.body;
 
+    // Check if the user is a superadmin
+
+    const user = req.user;
+
+    const isSuperadmin = user.roles.includes("superAdmin");
+
+    if (!isSuperadmin) {
+        return res.status(401).send("Unauthorized");
+    }
+
     try {
         // Find the user IDs for the given email addresses
         const memberIds = await Promise.all(
