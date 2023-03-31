@@ -55,4 +55,6 @@ const showAllProjects = async (req, res) => {
     }
 };
 
+// Path: server/routes/projectRoutes.js
+
 module.exports = { createProject, showAllProjects };

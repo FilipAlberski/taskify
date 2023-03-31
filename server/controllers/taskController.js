@@ -1,5 +1,8 @@
 const Task = require("../models/taskModel");
 const Project = require("../models/projectModel");
+const { checkPermission } = require("../controllers/utils/checkPermission");
+
+//permissions check
 
 // Show specific task
 exports.showTask = async (req, res) => {
@@ -13,22 +16,26 @@ exports.showTask = async (req, res) => {
 
     const project = await Project.findOne({ _id: task.project }).lean();
 
-    // Check if the user is a superadmin, a member of the project, or a coworker
+    // Check if the user has permission to view the task
     const user = req.user;
+    const hasPermission = checkPermission(user, project, task);
 
-    const isSuperadmin = user.roles.includes("superAdmin");
-    const isMember = user._id in project.members;
-    const isCoworker = user._id in task.coworkers;
-
-    if (!isSuperadmin && !isMember && !isCoworker) {
+    if (!hasPermission) {
         return res.status(401).send("Unauthorized");
     }
 
     res.send(task);
 };
 
-//edit task
-exports.editTask = async (req, res) => {
-    console.log("task edit");
-    res.send("task edit");
+//delete task
+
+//show tasks by filter
+
+exports.showTasksByFilter = async (req, res) => {
+    const { filter } = req.params;
+
+    const tasks = Task.find;
 };
+
+//edit task
+exports.editTask = async (req, res) => {};
