@@ -1,5 +1,6 @@
 const Task = require("../models/taskModel");
 const Project = require("../models/projectModel");
+const User = require("../models/userModel");
 const { checkPermission } = require("../controllers/utils/checkPermission");
 
 //permissions check
@@ -23,6 +24,9 @@ exports.showTask = async (req, res) => {
     if (!hasPermission) {
         return res.status(401).send("Unauthorized");
     }
+
+    const assingedUser = await User.findOne({ _id: task.assignedTo }).lean();
+    task.assignedTo = assingedUser;
 
     res.send(task);
 };
