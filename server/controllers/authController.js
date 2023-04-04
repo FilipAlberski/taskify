@@ -1,5 +1,6 @@
 const { StatusCodes } = require("http-status-codes");
 const User = require("../models/userModel");
+const cookieParser = require("cookie-parser");
 
 const register = async (req, res) => {
     const { name, email, password } = req.body;
@@ -76,6 +77,17 @@ const login = async (req, res, next) => {
     res.status(StatusCodes.OK).json({
         user,
         token,
+    });
+};
+
+//logout
+
+const logout = async (req, res) => {
+    //delete cookie
+
+    res.cookie("token", "none", {
+        expires: new Date(Date.now() + 10 * 1000),
+        httpOnly: true,
     });
 };
 
