@@ -83,15 +83,19 @@ const login = async (req, res, next) => {
 //logout
 
 const logout = async (req, res) => {
-    //delete cookie
-
     res.cookie("token", "none", {
         expires: new Date(Date.now() + 10 * 1000),
         httpOnly: true,
+    });
+
+    res.status(StatusCodes.OK).json({
+        success: true,
+        data: {},
     });
 };
 
 module.exports = {
     login,
     register,
+    logout,
 };
