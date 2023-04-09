@@ -10,7 +10,7 @@ export const StyledLogoutButton = styled.button`
     border: none;
     border-radius: 5px;
     padding: 10px 20px;
-    font-size: 1.2rem;
+
     cursor: pointer;
     transition: all 0.3s ease-in-out;
     &:hover {
