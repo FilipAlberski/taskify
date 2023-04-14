@@ -16,11 +16,9 @@ const createProject = async (req, res) => {
 
     try {
         // Find the user IDs for the given usernames or emails
-        const memberIds = await User.find({ email: { $in: memberEmails } }).select(
-            "_id"
-        );
-
-        
+        const memberIds = await User.find({
+            email: { $in: memberEmails },
+        }).select("_id");
 
         // Create new project
         const project = new Project({
@@ -40,12 +38,11 @@ const createProject = async (req, res) => {
     }
 };
 
-// show all projects
+// show all projects res only name and ID
 
 const showAllProjects = async (req, res) => {
     try {
-        const projects = await Project.find().lean();
-
+        const projects = await Project.find().select("name _id");
         res.status(200).json({ success: true, data: projects });
     } catch (error) {
         res.status(500).json({ success: false, error: error.message });

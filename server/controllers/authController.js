@@ -83,19 +83,25 @@ const login = async (req, res, next) => {
 //logout
 
 const logout = async (req, res) => {
-    res.cookie("token", "none", {
-        expires: new Date(Date.now() + 10 * 1000),
-        httpOnly: true,
-    });
+    res.clearCookie("token");
+    res.status(StatusCodes.OK).json({ success: true });
+};
 
-    res.status(StatusCodes.OK).json({
-        success: true,
-        data: {},
-    });
+//show all users and their ID and mail
+
+const showAllUsers = async (req, res) => {
+    try {
+        const users = await User.find().select("name _id email");
+        res.status(StatusCodes.OK).json({ success: true, data: users });
+    } catch (error) {
+        res.status(StatusCodes.BAD_REQUEST).json({ success: false });
+        throw new Error(error.message);
+    }
 };
 
 module.exports = {
     login,
     register,
     logout,
+    showAllUsers,
 };

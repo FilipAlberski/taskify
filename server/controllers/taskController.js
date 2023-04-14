@@ -35,11 +35,5 @@ exports.showTask = async (req, res) => {
 
 //show tasks by filter
 
-exports.showTasksByFilter = async (req, res) => {
-    const { filter } = req.params;
-
-    const tasks = Task.find;
-};
-
 //edit task
 exports.editTask = async (req, res) => {};
