@@ -1,7 +1,9 @@
 import React from "react";
 
+import { DashboardMainContainer } from "./DashboardMain.styled";
+
 const DashboardMain = ({ children }) => {
-    return <div>{children}</div>;
+    return <DashboardMainContainer>{children}</DashboardMainContainer>;
 };
 
 export default DashboardMain;
