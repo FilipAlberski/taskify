@@ -2,11 +2,13 @@ import React from "react";
 import { StyledLogoutButton } from "./LogoutButton.styled.js";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+
 const LogoutButton = () => {
     const navigate = useNavigate();
-    const handleLogout = () => {
+    const handleLogout = async () => {
         try {
-            axios.get("/api/auth/logout");
+            const response = await axios.get("/api/auth/logout");
+            console.log(response);
             navigate("/landing");
             localStorage.removeItem("token");
             localStorage.removeItem("user");
