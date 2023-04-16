@@ -38,7 +38,6 @@ export const RegisterContainer = styled.div`
         position: absolute;
         top: 0;
         left: 0;
-        padding: 1rem;
 
         width: 100%;
         display: flex;

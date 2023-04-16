@@ -2,8 +2,10 @@ import React, { useState, useEffect } from "react";
 import { SidebarContainer } from "./Sidebar.styled";
 import { useSelector, useDispatch } from "react-redux";
 import { SET_SIDEBAR_WIDTH } from "../../redux/slices/appSlice";
+import { useNavigate } from "react-router-dom";
 
 const SmallSidebar = () => {
+    const navigate = useNavigate();
     const dispatch = useDispatch();
 
     const sidebarWidth = useSelector(
@@ -24,7 +26,32 @@ const SmallSidebar = () => {
 
     return (
         <SidebarContainer sidebarWidth={sidebarWidth}>
-            <div className="sidebar">sidebaree</div>
+            <div
+                className="sidebar-item"
+                onClick={() => {
+                    navigate("/dashboard");
+                }}
+            >
+                Tasks
+            </div>
+            <div
+                className="sidebar-item"
+                onClick={() => {
+                    navigate("/dashboard/stats");
+                }}
+            >
+                Stats
+            </div>
+            <div
+                className="sidebar-item"
+                onClick={() => {
+                    navigate("/dashboard/settings");
+                }}
+            >
+                Settings
+            </div>
+            <h4>your dashboards</h4>
+
             <div
                 className="sidebar-resizer"
                 onMouseDown={() => {

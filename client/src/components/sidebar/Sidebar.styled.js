@@ -9,6 +9,8 @@ export const SidebarContainer = styled.div`
 
     .sidebar {
         height: 100%;
+        width: 100%;
+        background-color: red;
     }
 
     .sidebar-resizer {

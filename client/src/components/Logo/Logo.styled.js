@@ -1,8 +1,10 @@
 import styled from "styled-components";
 
 export const LogoContainer = styled.div`
-    height: 100%;
-    width: 100%;
     font-size: 2rem;
     color: ${(props) => props.theme.specialColor};
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
 `;
