@@ -6,12 +6,7 @@ export const SidebarContainer = styled.div`
     min-width: 60px;
     max-width: 300px;
     position: relative;
-
-    .sidebar {
-        height: 100%;
-        width: 100%;
-        background-color: red;
-    }
+    padding: 0.5rem;
 
     .sidebar-resizer {
         position: absolute;
