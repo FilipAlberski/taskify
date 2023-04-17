@@ -50,7 +50,7 @@ const SmallSidebar = () => {
             >
                 Settings
             </div>
-            <h4>your dashboards</h4>
+            <h4>your dashboards test</h4>
 
             <div
                 className="sidebar-resizer"
