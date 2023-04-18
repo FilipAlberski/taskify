@@ -64,9 +64,14 @@ async function firstStart() {
             console.log("Adding tasks to the main project");
             mainProject.tasks.addToSet(task1._id);
             mainProject.tasks.addToSet(task2._id);
+
+            //add user to members of project
+            mainProject.members.addToSet(rootUser._id);
+
             await mainProject.save();
 
             console.log("Default project created successfully");
+            //add user to project
         } else {
             console.log("Default project already exists");
         }

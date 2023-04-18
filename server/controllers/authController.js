@@ -1,6 +1,7 @@
 const { StatusCodes } = require("http-status-codes");
 const User = require("../models/userModel");
 const cookieParser = require("cookie-parser");
+const Project = require("../models/projectModel");
 
 const register = async (req, res) => {
     const { name, email, password } = req.body;
@@ -29,6 +30,20 @@ const register = async (req, res) => {
         email,
         password,
     });
+
+    //add user to the main project
+
+    try {
+        const mainProject = await Project.findOne({ name: "main" });
+
+        await mainProject.members.push(user._id);
+
+        await mainProject.save();
+    } catch (err) {
+        console.log(err);
+    }
+
+    //create token
 
     const token = await user.getSignedJwtToken();
 
