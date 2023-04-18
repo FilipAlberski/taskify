@@ -1,10 +1,9 @@
 function checkPermission(user, project, task) {
     const isSuperadmin = user.roles.includes("superAdmin");
 
-    const isMember = project.members.find((member) => {
-        return member._id == user._id;
-    });
-    console.log(isMember);
+    //check if user is member of project by his id in members array but this is not working
+    const isMember = user._id in project.members;
+
     const isCoworker = user._id in task.coworkers;
 
     //if user is super admin or member of project or coworker of task
