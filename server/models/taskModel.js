@@ -32,6 +32,7 @@ const TaskSchema = new Schema(
         project: {
             type: Schema.Types.ObjectId,
             ref: "Project",
+            required: true,
         },
         coworkers: [
             {
@@ -39,6 +40,7 @@ const TaskSchema = new Schema(
                 ref: "User",
             },
         ],
+
         comments: [
             {
                 text: {

@@ -3,7 +3,7 @@ import { TasksContainer } from "./tasks.styled";
 import DashboardPicker from "../../../components/DashboardPicker/DashboardPicker";
 import axios from "axios";
 import { useEffect } from "react";
-
+import FilteredTasks from "../../../components/FilteredTasks/FilteredTasks";
 import { DashboardMainContainer } from "../../../components/DashboardMain/DashboardMain.styled";
 
 const Tasks = () => {
@@ -20,7 +20,7 @@ const Tasks = () => {
     return (
         <DashboardMainContainer>
             <TasksContainer>
-                <div className="tasks">test2</div>
+                <FilteredTasks />
             </TasksContainer>
         </DashboardMainContainer>
     );
