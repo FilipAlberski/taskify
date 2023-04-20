@@ -28,7 +28,8 @@ const FilteredTasks = () => {
                 params,
             });
             if (response.data === "No tasks") {
-                await setTasks([]);
+                setTasks([]);
+
                 throw new Error("No tasks found");
             }
             await setTasks(response.data);
