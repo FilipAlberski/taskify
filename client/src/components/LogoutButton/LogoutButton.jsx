@@ -9,7 +9,7 @@ const LogoutButton = () => {
         try {
             const response = await axios.get("/api/auth/logout");
             console.log(response);
-            navigate("/landing");
+            navigate("/register");
             localStorage.removeItem("token");
             localStorage.removeItem("user");
         } catch (err) {

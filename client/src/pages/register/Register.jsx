@@ -50,13 +50,6 @@ const Register = () => {
     // navigate if user is logged in
     const navigate = useNavigate();
     const { user } = appSlice;
-    useEffect(() => {
-        if (user) {
-            setTimeout(() => {
-                navigate("/dashboard");
-            }, 1000);
-        }
-    }, [user, navigate]);
 
     //destructure values
 
@@ -97,6 +90,9 @@ const Register = () => {
             dispatch(registerUser(currentUser));
             dispatch(setLoading(false));
         }
+        setTimeout(() => {
+            navigate("/dashboard");
+        }, 1000);
     };
 
     return (
