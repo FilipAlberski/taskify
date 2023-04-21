@@ -70,6 +70,7 @@ const FilteredTasks = () => {
                 </div>
                 <button type="submit">Filter</button>
             </form>
+
             <ul>
                 {tasks.map((task) => (
                     <li key={task._id}>

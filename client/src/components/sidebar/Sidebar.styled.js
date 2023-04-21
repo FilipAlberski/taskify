@@ -7,6 +7,11 @@ export const SidebarContainer = styled.div`
     max-width: 300px;
     position: relative;
     padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    overflow: hidden;
 
     .sidebar-resizer {
         position: absolute;

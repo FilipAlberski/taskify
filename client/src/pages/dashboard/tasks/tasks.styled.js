@@ -3,11 +3,10 @@ import styled from "styled-components";
 export const TasksContainer = styled.div`
     min-width: 100%;
     min-height: 100%;
+    // status, key, title, priority, created at, updated at
 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
 
     padding: 0.5rem;
 

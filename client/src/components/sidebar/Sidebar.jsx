@@ -24,33 +24,20 @@ const SmallSidebar = () => {
         return () => clearTimeout(timeout);
     }, [handleResize]);
 
+    //use effecto to get dashboards from db
+
     return (
         <SidebarContainer sidebarWidth={sidebarWidth}>
-            <div
-                className="sidebar-item"
-                onClick={() => {
-                    navigate("/dashboard");
-                }}
-            >
-                Tasks
-            </div>
-            <div
-                className="sidebar-item"
-                onClick={() => {
-                    navigate("/dashboard/stats");
-                }}
-            >
-                Stats
-            </div>
-            <div
-                className="sidebar-item"
-                onClick={() => {
-                    navigate("/dashboard/settings");
-                }}
-            >
-                Settings
-            </div>
-            <h4>your dashboards test</h4>
+            <h4>Dashboards</h4>
+            <ul>
+                <li
+                    onClick={() => {
+                        navigate("/dashboard");
+                    }}
+                >
+                    Assigned to you
+                </li>
+            </ul>
 
             <div
                 className="sidebar-resizer"
