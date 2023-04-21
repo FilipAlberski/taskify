@@ -17,7 +17,8 @@ const Navbar = () => {
             <div className="leftSide">
                 <Logo />
                 <p>Dasboards</p>
-                {appSlice.user.roles.includes("superAdmin") && <p>admin</p>}
+                {appSlice.user &&
+                    appSlice.user.roles.includes("superAdmin") && <p>admin</p>}
             </div>
             <div className="rightSide">
                 <p>
