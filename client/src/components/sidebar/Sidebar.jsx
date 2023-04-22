@@ -14,7 +14,6 @@ const SmallSidebar = () => {
 
     const handleResize = (event) => {
         dispatch(SET_SIDEBAR_WIDTH(event.clientX));
-        //setSidebarWidth(event.clientX);
     };
 
     useEffect(() => {
