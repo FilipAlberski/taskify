@@ -33,3 +33,5 @@ const dashboardSchema = new schema({
         required: true,
     },
 });
+
+module.exports = mongoose.model("Dashboard", dashboardSchema);
