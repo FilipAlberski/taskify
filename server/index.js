@@ -5,6 +5,7 @@ const errorHandlerMiddleware = require("./middleware/errorHandler");
 const authRoutes = require("./routes/authRoutes");
 const projectRoutes = require("./routes/projectRoutes");
 const taskRoutes = require("./routes/taskRoutes");
+const dashboardRoutes = require("./routes/dashboardRoutes");
 const notFoundMiddleware = require("./middleware/notFound");
 const cors = require("cors");
 const morgan = require("morgan");
@@ -38,6 +39,7 @@ app.get("/api/v1/apitest", (req, res) => {
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/projects", projectRoutes);
 app.use("/api/v1/tasks", taskRoutes);
+app.use("/api/v1/dashboard", dashboardRoutes);
 
 //error handler
 app.use(notFoundMiddleware);

@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 
-const { schema } = mongoose;
+const { Schema } = mongoose;
 
-const dashboardSchema = new schema({
+const dashboardSchema = new Schema({
     name: {
         type: String,
         required: true,
@@ -11,6 +11,12 @@ const dashboardSchema = new schema({
     createdBy: {
         type: Schema.Types.ObjectId,
         ref: "User",
+        required: true,
+    },
+    showOnSidebar: {
+        type: Boolean,
+        default: true,
+        required: true,
     },
     isPrivate: {
         type: Boolean,
