@@ -14,3 +14,6 @@
 -   copy rep
 -   if you use yarn `yarn yarninstallall`
 -   if npm `npm npminstallall`
+
+https://www.bezkoder.com/react-hooks-redux-login-registration-example/
+https://www.bezkoder.com/react-redux-login-example-toolkit-hooks/
