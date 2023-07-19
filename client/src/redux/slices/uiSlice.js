@@ -2,16 +2,10 @@ import { createSlice } from '@reduxjs/toolkit';
 
 //local storage
 
-const getLocalStorageTheme = () => {
-  let theme = 'light';
-  if (localStorage.getItem('theme')) {
-    theme = localStorage.getItem('theme');
-  }
-  return theme;
-};
+const getLocalStorageTheme = () => {};
 
 const initialState = {
-  theme: getLocalStorageTheme() || 'light',
+  theme: getLocalStorageTheme() || 'dark',
   isSidebarOpen: false,
   isModalOpen: false,
   modalContent: '',
