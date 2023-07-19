@@ -12,9 +12,28 @@ import {
   Grid,
   Link,
 } from '@mui/material';
-//copyright import
+import { useState } from 'react';
 
 const LoginPage = () => {
+  const [loginData, setLoginData] = useState({
+    email: '',
+    password: '',
+    rememberMe: false,
+  });
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log(loginData);
+  };
+
+  const onChange = (event) => {
+    const { name, value, checked } = event.target;
+    setLoginData((prev) => ({
+      ...prev,
+      [name]: name === 'rememberMe' ? checked : value,
+    }));
+  };
+
   return (
     <Container component="main" maxWidth="xs">
       <Box
@@ -29,7 +48,12 @@ const LoginPage = () => {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <Box component="form" noValidate sx={{ mt: 1 }}>
+        <Box
+          component="form"
+          noValidate
+          sx={{ mt: 1 }}
+          onSubmit={handleSubmit}
+        >
           <TextField
             margin="normal"
             required
@@ -39,6 +63,7 @@ const LoginPage = () => {
             name="email"
             autoComplete="email"
             autoFocus
+            onChange={onChange}
           />
           <TextField
             margin="normal"
@@ -49,10 +74,13 @@ const LoginPage = () => {
             type="password"
             id="password"
             autoComplete="current-password"
+            onChange={onChange}
           />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
+            name="rememberMe"
+            onChange={onChange}
           />
           <Button
             type="submit"
