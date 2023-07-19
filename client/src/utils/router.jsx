@@ -12,12 +12,15 @@ import RegisterPage from '../pages/RegisterPage.jsx';
 import WelcomePage from '../pages/WelcomePage.jsx';
 import NotFoundPage from '../pages/NotFoundPage.jsx';
 
+import Test from '../pages/Test.jsx';
+
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
       <Route index element={<WelcomePage />} />
       <Route path="login" element={<LoginPage />} />
       <Route path="register" element={<RegisterPage />} />
+      <Route path="test" element={<Test />} />
       <Route path="dashboard" element={<SharedLayout />}>
         {/* <Route index element={<DashboardPage />} />  and others*/}
       </Route>
