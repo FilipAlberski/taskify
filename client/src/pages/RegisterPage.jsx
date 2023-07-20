@@ -13,30 +13,33 @@ import {
   Link,
 } from '@mui/material';
 
-import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { registerUser } from '../redux/actions/authActions';
+import { useEffect } from 'react';
 
 const RegisterPage = () => {
-  const [registerData, setRegisterData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: '',
-    acceptRules: false,
-    allowExtraEmails: false,
-  });
+  const { loading, error, userInfo } = useSelector(
+    (state) => state.auth
+  );
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log(registerData);
+  const dispatch = useDispatch();
+
+  const { register, handleSubmit } = useForm();
+
+  const navigate = useNavigate();
+
+  const onSubmit = (data) => {
+    dispatch(registerUser(data));
+    console.log(data);
   };
 
-  const onChange = (event) => {
-    const { name, value, checked } = event.target;
-    setRegisterData((prev) => ({
-      ...prev,
-      [name]: name === 'acceptRules' ? checked : value,
-    }));
-  };
+  useEffect(() => {
+    if (userInfo) {
+      navigate('/'); //do zmiany
+    }
+  }, [navigate, userInfo]);
 
   return (
     <Container component="main" maxWidth="xs">
@@ -55,8 +58,8 @@ const RegisterPage = () => {
         <Box
           component="form"
           noValidate
-          onSubmit={handleSubmit}
           sx={{ mt: 3 }}
+          onSubmit={handleSubmit(onSubmit)}
         >
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
@@ -68,7 +71,7 @@ const RegisterPage = () => {
                 id="firstName"
                 label="First Name"
                 autoFocus
-                onChange={onChange}
+                {...register('firstName')}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -79,7 +82,7 @@ const RegisterPage = () => {
                 label="Last Name"
                 name="lastName"
                 autoComplete="family-name"
-                onChange={onChange}
+                {...register('lastName')}
               />
             </Grid>
             <Grid item xs={12}>
@@ -90,7 +93,7 @@ const RegisterPage = () => {
                 label="Email Address"
                 name="email"
                 autoComplete="email"
-                onChange={onChange}
+                {...register('email')}
               />
             </Grid>
             <Grid item xs={12}>
@@ -102,7 +105,7 @@ const RegisterPage = () => {
                 type="password"
                 id="password"
                 autoComplete="new-password"
-                onChange={onChange}
+                {...register('password')}
               />
             </Grid>
             <Grid item xs={12}>
@@ -114,31 +117,25 @@ const RegisterPage = () => {
                 type="password"
                 id="passwordConfirm"
                 autoComplete="new-password"
-                onChange={onChange}
+                {...register('passwordConfirm')}
               />
             </Grid>
 
             <Grid item xs={12}>
               <FormControlLabel
                 control={
-                  <Checkbox
-                    name="allowExtraEmails"
-                    color="primary"
-                    onChange={onChange}
-                  />
+                  <Checkbox name="allowExtraEmails" color="primary" />
                 }
                 label="I want to receive inspiration, marketing promotions and updates via email."
+                {...register('allowExtraEmails')}
               />
 
               <FormControlLabel
                 control={
-                  <Checkbox
-                    name="acceptRules"
-                    color="primary"
-                    onChange={onChange}
-                  />
+                  <Checkbox name="acceptRules" color="primary" />
                 }
                 label="I accept the rules"
+                {...register('acceptRules')}
               />
             </Grid>
           </Grid>
@@ -147,7 +144,6 @@ const RegisterPage = () => {
             fullWidth
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
-            disabled={!registerData.acceptRules}
           >
             Sign Up
           </Button>

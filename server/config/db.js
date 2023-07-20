@@ -8,7 +8,8 @@ const connectDB = async () => {
       useNewUrlParser: true,
     });
     console.log(
-      `mongodb connected: ${conn.connection.host}`.cyan.underline
+      `mongodb connected: ${conn.connection.host} on address: ${process.env.MONGO_URI}`
+        .cyan.underline
     );
   } catch (error) {
     console.log(`Error: ${error.message}`.underline.bold);
