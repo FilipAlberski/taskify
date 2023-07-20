@@ -9,28 +9,34 @@ import {
   Button,
   Grid,
   Link,
+  CircularProgress,
 } from '@mui/material';
-import { useState } from 'react';
+
+import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { userLogin } from '../redux/actions/authActions';
+import { useEffect } from 'react';
 
 const LoginPage = () => {
-  const [loginData, setLoginData] = useState({
-    email: '',
-    password: '',
-    rememberMe: false,
-  });
+  const { loading, error, userInfo } = useSelector(
+    (state) => state.auth
+  );
+  const dispatch = useDispatch();
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log(loginData);
+  const { register, handleSubmit } = useForm();
+
+  const navigate = useNavigate();
+
+  const onSubmit = (data) => {
+    dispatch(userLogin(data));
   };
 
-  const onChange = (event) => {
-    const { name, value, checked } = event.target;
-    setLoginData((prev) => ({
-      ...prev,
-      [name]: name === 'rememberMe' ? checked : value,
-    }));
-  };
+  useEffect(() => {
+    if (userInfo) {
+      navigate('/'); //do zmiany
+    }
+  }, [navigate, userInfo]);
 
   return (
     <Container component="main" maxWidth="xs">
@@ -48,9 +54,9 @@ const LoginPage = () => {
         </Typography>
         <Box
           component="form"
+          onSubmit={handleSubmit(onSubmit)}
           noValidate
           sx={{ mt: 1 }}
-          onSubmit={handleSubmit}
         >
           <TextField
             margin="normal"
@@ -61,7 +67,6 @@ const LoginPage = () => {
             name="email"
             autoComplete="email"
             autoFocus
-            onChange={onChange}
           />
           <TextField
             margin="normal"
@@ -72,13 +77,11 @@ const LoginPage = () => {
             type="password"
             id="password"
             autoComplete="current-password"
-            onChange={onChange}
           />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
             name="rememberMe"
-            onChange={onChange}
           />
           <Button
             type="submit"
@@ -86,7 +89,11 @@ const LoginPage = () => {
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
           >
-            Sign In
+            {loading ? (
+              <CircularProgress color="inherit" size={20} />
+            ) : (
+              'Sign In'
+            )}
           </Button>
           <Grid container>
             <Grid item xs>
