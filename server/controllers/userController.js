@@ -3,7 +3,7 @@ import User from '../models/userModel.js';
 import generateToken from '../utils/generateToken.js';
 
 const registerUser = asyncHandler(async (req, res) => {
-  const { firstName, email, password } = req.body;
+  const { firstName, email, password, lastName } = req.body;
 
   // check if email exists in db
   const userExists = await User.findOne({ email });
@@ -14,7 +14,12 @@ const registerUser = asyncHandler(async (req, res) => {
   }
 
   // create new user document in db
-  const user = await User.create({ firstName, email, password });
+  const user = await User.create({
+    firstName,
+    email,
+    password,
+    lastName,
+  });
 
   if (user) {
     res.status(201).json({
