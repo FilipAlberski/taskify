@@ -30,6 +30,7 @@ const LoginPage = () => {
 
   const onSubmit = (data) => {
     dispatch(userLogin(data));
+    console.log(data);
   };
 
   useEffect(() => {
@@ -67,6 +68,7 @@ const LoginPage = () => {
             name="email"
             autoComplete="email"
             autoFocus
+            {...register('email')}
           />
           <TextField
             margin="normal"
@@ -77,11 +79,13 @@ const LoginPage = () => {
             type="password"
             id="password"
             autoComplete="current-password"
+            {...register('password')}
           />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
             name="rememberMe"
+            {...register('rememberMe')}
           />
           <Button
             type="submit"
