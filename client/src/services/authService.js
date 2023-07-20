@@ -1,32 +1,31 @@
-import axios from 'axios';
+import {
+  createApi,
+  fetchBaseQuery,
+} from '@reduxjs/toolkit/query/react';
 
-const API_URL = 'http://localhost:5000/api/auth/';
+export const authApi = createApi({
+  reducerPath: 'authApi',
+  baseQuery: fetchBaseQuery({
+    baseUrl: 'http://localhost:4040/',
 
-const register = async (username, email, password) => {
-  return await axios.post(API_URL + 'signup', {
-    username,
-    email,
-    password,
-  });
-};
+    prepareHeaders: (headers, { getState }) => {
+      const token = getState().auth.token;
+      if (token) {
+        headers.set('authorization', `Bearer ${token}`);
 
-const login = async (username, password) => {
-  const response = await axios.post(API_URL + 'signin', {
-    username,
-    password,
-  });
-  if (response.data.accessToken) {
-    localStorage.setItem('user', JSON.stringify(response.data));
-  }
-  return response.data;
-};
+        return headers;
+      }
+    },
+  }),
+  endpoints: (build) => ({
+    getDetails: build.query({
+      query: () => ({
+        url: 'api/auth/current',
+        method: 'GET',
+      }),
+    }),
+  }),
+});
 
-const logout = () => {
-  localStorage.removeItem('user');
-};
-
-export default {
-  register,
-  login,
-  logout,
-};
+// export react hook
+export const { useGetDetailsQuery } = authApi;

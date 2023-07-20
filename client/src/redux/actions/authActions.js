@@ -1,48 +1,64 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-const API_URL = 'http://localhost:5000/';
+const backendURL = 'http://localhost:4040/';
 
-const registerUser = createAsyncThunk(
-  'auth/registerUser',
-  async (user, { rejectWithValue }) => {
+export const userLogin = createAsyncThunk(
+  'auth/login',
+  async ({ username, password }, { rejectWithValue }) => {
     try {
-      const response = await axios.post(
-        API_URL + 'api/auth/register',
-        user
+      // configure header's Content-Type as JSON
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      };
+
+      const { data } = await axios.post(
+        `${backendURL}auth/login`,
+        { username, password },
+        config
       );
-      return response.data;
+
+      // store user's token in local storage
+      localStorage.setItem('userToken', data.userToken);
+
+      return data;
     } catch (error) {
-      return rejectWithValue(error.response.data);
+      // return custom error message from API if any
+      if (error.response && error.response.data.error_message) {
+        return rejectWithValue(error.response.data.error_message);
+      } else {
+        return rejectWithValue(error.message);
+      }
     }
   }
 );
 
-const loginUser = createAsyncThunk(
-  'auth/loginUser',
-  async (user, { rejectWithValue }) => {
+export const registerUser = createAsyncThunk(
+  'user/register',
+  async (
+    { firstName, lastName, email, password },
+    { rejectWithValue }
+  ) => {
     try {
-      const response = await axios.post(
-        API_URL + 'api/auth/login',
-        user
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      };
+
+      await axios.post(
+        `${backendURL}/api/user/register`,
+        { firstName, lastName, email, password },
+        config
       );
-      return response.data;
     } catch (error) {
-      return rejectWithValue(error.response.data);
+      if (error.response && error.response.data.message) {
+        return rejectWithValue(error.response.data.message);
+      } else {
+        return rejectWithValue(error.message);
+      }
     }
   }
 );
-
-const logoutUser = createAsyncThunk(
-  'auth/logoutUser',
-  async (_, { rejectWithValue }) => {
-    try {
-      const response = await axios.get(API_URL + 'api/auth/logout');
-      return response.data;
-    } catch (error) {
-      return rejectWithValue(error.response.data);
-    }
-  }
-);
-
-export { registerUser, loginUser, logoutUser };

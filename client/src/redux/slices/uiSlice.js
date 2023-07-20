@@ -6,12 +6,6 @@ const getLocalStorageTheme = () => {};
 
 const initialState = {
   theme: getLocalStorageTheme() || 'dark',
-  isSidebarOpen: false,
-  isModalOpen: false,
-  modalContent: '',
-  isNotificationOpen: false,
-  notificationContent: '',
-  notificationType: '',
 };
 
 const uiSlice = createSlice({
