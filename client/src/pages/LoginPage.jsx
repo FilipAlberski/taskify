@@ -10,6 +10,7 @@ import {
   Grid,
   Link,
   CircularProgress,
+  LinearProgress,
 } from '@mui/material';
 
 import { useForm } from 'react-hook-form';
@@ -17,6 +18,8 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { userLogin } from '../redux/actions/authActions';
 import { useEffect } from 'react';
+
+import Alerts from '../components/Alerts';
 
 const LoginPage = () => {
   const { loading, error, userInfo } = useSelector(
@@ -50,9 +53,10 @@ const LoginPage = () => {
         }}
       >
         <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>essa</Avatar>
-        <Typography component="h1" variant="h5">
+        <Typography component="h1" variant="h5" p={2}>
           Sign in
         </Typography>
+        {error && <Alerts type="error" text={error} />}
         <Box
           component="form"
           onSubmit={handleSubmit(onSubmit)}
@@ -94,7 +98,7 @@ const LoginPage = () => {
             sx={{ mt: 3, mb: 2 }}
           >
             {loading ? (
-              <CircularProgress color="inherit" size={20} />
+              <CircularProgress size={24} color="inherit" />
             ) : (
               'Sign In'
             )}

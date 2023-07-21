@@ -11,7 +11,10 @@ import {
   Checkbox,
   Button,
   Link,
+  LinearProgress,
 } from '@mui/material';
+
+import Alerts from '../components/Alerts';
 
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
@@ -52,9 +55,10 @@ const RegisterPage = () => {
         }}
       >
         <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>essa</Avatar>
-        <Typography component="h1" variant="h5">
+        <Typography component="h1" variant="h5" p={1}>
           Sign up
         </Typography>
+        {error && <Alerts type="error" text={error} />}
         <Box
           component="form"
           noValidate
@@ -139,13 +143,15 @@ const RegisterPage = () => {
               />
             </Grid>
           </Grid>
+
           <Button
             type="submit"
             fullWidth
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
+            height="50px"
           >
-            Sign Up
+            {loading ? <LinearProgress /> : 'Sign Up'}
           </Button>
 
           <Grid container justifyContent="flex-end">

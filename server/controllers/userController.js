@@ -39,6 +39,11 @@ const loginUser = asyncHandler(async (req, res) => {
   // check if user email exists in db
   const user = await User.findOne({ email });
 
+  if (!user) {
+    res.status(404);
+    throw new Error('User not found');
+  }
+
   // return user obj if their password matches
   if (user && (await user.matchPassword(password))) {
     res.json({
