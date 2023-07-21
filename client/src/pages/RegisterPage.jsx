@@ -23,7 +23,7 @@ import { registerUser } from '../redux/actions/authActions';
 import { useEffect } from 'react';
 
 const RegisterPage = () => {
-  const { loading, error, userInfo } = useSelector(
+  const { loading, error, userInfo, success } = useSelector(
     (state) => state.auth
   );
 
@@ -59,6 +59,7 @@ const RegisterPage = () => {
           Sign up
         </Typography>
         {error && <Alerts type="error" text={error} />}
+        {success && <Alerts type="success" text={'User created'} />}
         <Box
           component="form"
           noValidate

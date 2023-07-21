@@ -5,9 +5,10 @@ const backendURL = 'http://localhost:4040';
 
 export const userLogin = createAsyncThunk(
   'auth/login',
-  async ({ username, password }, { rejectWithValue }) => {
+  async ({ email, password }, { rejectWithValue }) => {
     try {
       // configure header's Content-Type as JSON
+
       const config = {
         headers: {
           'Content-Type': 'application/json',
@@ -16,7 +17,7 @@ export const userLogin = createAsyncThunk(
 
       const { data } = await axios.post(
         `${backendURL}/api/user/login`,
-        { username, password },
+        { email, password },
         config
       );
 

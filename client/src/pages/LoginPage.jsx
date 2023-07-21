@@ -33,7 +33,6 @@ const LoginPage = () => {
 
   const onSubmit = (data) => {
     dispatch(userLogin(data));
-    console.log(data);
   };
 
   useEffect(() => {
