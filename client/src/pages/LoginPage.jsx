@@ -10,7 +10,6 @@ import {
   Grid,
   Link,
   CircularProgress,
-  LinearProgress,
 } from '@mui/material';
 
 import { useForm } from 'react-hook-form';
