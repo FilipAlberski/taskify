@@ -80,7 +80,15 @@ const forgotPassword = asyncHandler(async (req, res) => {
   if (user) {
     const resetToken = user.getResetPasswordToken();
 
+    await user.save({ validateBeforeSave: false });
 
+    res.json({
+      message: 'Email sent',
+    });
+  } else {
+    res.status(404);
+    throw new Error('User not found');
+  }
 });
 
 export { registerUser, loginUser, getUserProfile, forgotPassword };

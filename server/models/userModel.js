@@ -20,6 +20,10 @@ const userSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    resetPasswordToken: {
+      type: String,
+      required: false,
+    },
   },
   {
     timestamps: true,
@@ -31,6 +35,22 @@ userSchema.pre('save', async function () {
   const salt = await bcrypt.genSalt(10);
   this.password = await bcrypt.hash(this.password, salt);
 });
+
+userSchema.methods.getResetPasswordToken = async function () {
+  // generate token
+  const resetToken = crypto.randomBytes(20).toString('hex');
+
+  // hash token and set to resetPasswordToken field
+  this.resetPasswordToken = crypto
+    .createHash('sha256')
+    .update(resetToken)
+    .digest('hex');
+
+  // set token expiration
+  this.resetPasswordExpire = Date.now() + 10 * (60 * 1000);
+
+  return resetToken;
+};
 
 // extend matchPassword function unto userSchema
 userSchema.methods.matchPassword = async function (enteredPassword) {
