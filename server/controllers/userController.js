@@ -70,4 +70,17 @@ const getUserProfile = asyncHandler(async (req, res) => {
   }
 });
 
-export { registerUser, loginUser, getUserProfile };
+const forgotPassword = asyncHandler(async (req, res) => {
+  const { email } = req.body;
+
+  // check if user email exists in db
+
+  const user = await User.findById({ email });
+
+  if (user) {
+    const resetToken = user.getResetPasswordToken();
+
+
+});
+
+export { registerUser, loginUser, getUserProfile, forgotPassword };
