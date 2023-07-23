@@ -1,6 +1,7 @@
 import asyncHandler from 'express-async-handler';
 import User from '../models/userModel.js';
 import generateToken from '../utils/generateToken.js';
+import sendEmail from '../utils/sendEmail.js';
 
 const registerUser = asyncHandler(async (req, res) => {
   const { firstName, email, password, lastName } = req.body;
@@ -77,26 +78,9 @@ const forgotPassword = asyncHandler(async (req, res) => {
 
   const user = await User.findById({ email });
 
-  if (user) {
-    const resetToken = user.getResetPasswordToken();
+  //SEND TEST MAIL
 
-    await user.save({ validateBeforeSave: false });
-
-    const link = `http://localhost:3000/reset-password/${resetToken}`;
-
-    const message = `
-      <h1>You have requested a password reset</h1>
-      <p>Please click on the link below to reset your password</p>
-      <a href=${link} clicktracking=off>${link}</a>
-    `;
-
-    res.json({
-      message: 'Email sent',
-    });
-  } else {
-    res.status(404);
-    throw new Error('User not found');
-  }
+  sendEmail();
 });
 
 export { registerUser, loginUser, getUserProfile, forgotPassword };
