@@ -62,3 +62,30 @@ export const registerUser = createAsyncThunk(
     }
   }
 );
+
+//forgot password
+
+export const forgotPassword = createAsyncThunk(
+  'user/forgotPassword',
+  async ({ email }, { rejectWithValue }) => {
+    try {
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      };
+
+      await axios.post(
+        `${backendURL}/api/user/forgot-password`,
+        { email },
+        config
+      );
+    } catch (error) {
+      if (error.response && error.response.data.message) {
+        return rejectWithValue(error.response.data.message);
+      } else {
+        return rejectWithValue(error.message);
+      }
+    }
+  }
+);

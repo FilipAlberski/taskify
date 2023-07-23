@@ -8,7 +8,7 @@ import SharedLayout from '../pages/SharedLayout.jsx';
 
 import LoginPage from '../pages/LoginPage.jsx';
 import RegisterPage from '../pages/RegisterPage.jsx';
-
+import ForgotPassword from '../pages/ForgotPassword.jsx';
 import WelcomePage from '../pages/WelcomePage.jsx';
 import NotFoundPage from '../pages/NotFoundPage.jsx';
 
@@ -23,6 +23,7 @@ const router = createBrowserRouter(
       <Route path="login" element={<LoginPage />} />
       <Route path="register" element={<RegisterPage />} />
       <Route path="test" element={<Test />} />
+      <Route path="forgot-password" element={<ForgotPassword />} />
 
       <Route element={<ProtectedRoute />}>
         <Route path="dashboard" element={<SharedLayout />}></Route>
