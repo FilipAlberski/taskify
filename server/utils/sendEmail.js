@@ -1,9 +1,4 @@
 import nodemailer from 'nodemailer';
-import dotenv from 'dotenv';
-
-dotenv.config({
-  path: '../../.env',
-});
 
 const options = {
   user: process.env.MAIL_USER,
@@ -19,9 +14,10 @@ const transporter = nodemailer.createTransport({
     pass: options.pass,
   },
 });
+transporter.set('debug', true);
 
 const sendEmail = async ({ email, subject, message }) => {
-  console.log(process.env.MAIL_USER);
+  console.log(email, subject, message);
   const mailOptions = {
     from: 'filip.alberski@zoho.com',
     to: email,
@@ -31,9 +27,8 @@ const sendEmail = async ({ email, subject, message }) => {
 
   try {
     const info = await transporter.sendMail(mailOptions);
-    console.log(`Email sent: ${info.response}`);
   } catch (error) {
-    console.error(error);
+    throw new Error('Error sending email');
   }
 };
 

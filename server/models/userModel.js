@@ -1,5 +1,6 @@
 import bcrypt from 'bcryptjs';
 import { mongoose } from 'mongoose';
+import jwt from 'jsonwebtoken';
 
 const userSchema = mongoose.Schema(
   {
@@ -24,6 +25,10 @@ const userSchema = mongoose.Schema(
       type: String,
       required: false,
     },
+    resetPasswordExpire: {
+      type: Date,
+      required: false,
+    },
   },
   {
     timestamps: true,
@@ -37,19 +42,18 @@ userSchema.pre('save', async function () {
 });
 
 userSchema.methods.getResetPasswordToken = async function () {
-  // generate token
-  const resetToken = crypto.randomBytes(20).toString('hex');
-
-  // hash token and set to resetPasswordToken field
-  this.resetPasswordToken = crypto
-    .createHash('sha256')
-    .update(resetToken)
-    .digest('hex');
-
-  // set token expiration
-  this.resetPasswordExpire = Date.now() + 10 * (60 * 1000);
-
-  return resetToken;
+  try {
+    const resetToken = await jwt.sign(
+      { id: this._id.toString() },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: '1h',
+      }
+    );
+    return resetToken;
+  } catch (error) {
+    throw new Error('Failed to generate reset token');
+  }
 };
 
 // extend matchPassword function unto userSchema
