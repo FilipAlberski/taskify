@@ -82,6 +82,14 @@ const forgotPassword = asyncHandler(async (req, res) => {
 
     await user.save({ validateBeforeSave: false });
 
+    const link = `http://localhost:3000/reset-password/${resetToken}`;
+
+    const message = `
+      <h1>You have requested a password reset</h1>
+      <p>Please click on the link below to reset your password</p>
+      <a href=${link} clicktracking=off>${link}</a>
+    `;
+
     res.json({
       message: 'Email sent',
     });
