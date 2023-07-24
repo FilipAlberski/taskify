@@ -23,7 +23,7 @@ const router = createBrowserRouter(
       <Route path="login" element={<LoginPage />} />
       <Route path="register" element={<RegisterPage />} />
       <Route path="test" element={<Test />} />
-      <Route path="forgot-password" element={<ForgotPassword />} />
+      <Route path="password-reset" element={<ForgotPassword />} />
 
       <Route element={<ProtectedRoute />}>
         <Route path="dashboard" element={<SharedLayout />}></Route>

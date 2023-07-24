@@ -1,41 +1,30 @@
 import nodemailer from 'nodemailer';
+import asyncHandler from 'express-async-handler';
 
-const options = {
-  user: process.env.MAIL_USER,
-  pass: process.env.MAIL_PASS,
-};
-
-const transporter = nodemailer.createTransport({
-  host: 'smtp.zoho.com',
-  port: 465,
-  secure: true, // use SSL
-  auth: {
-    user: options.user,
-    pass: options.pass,
-  },
-});
-transporter.set('debug', true);
-
-const sendEmail = async ({ email, subject, message }) => {
-  console.log(email, subject, message);
-  const mailOptions = {
-    from: 'filip.alberski@zoho.com',
-    to: email,
-    subject,
-    text: message,
-  };
-
+const sendEmail = asyncHandler(async (email, subject, text) => {
   try {
-    const info = await transporter.sendMail(mailOptions);
+    const transporter = nodemailer.createTransport({
+      host: process.env.MAIL_HOST,
+      port: 465,
+      secure: true,
+      auth: {
+        user: process.env.MAIL_USER,
+        pass: process.env.MAIL_PASS,
+      },
+    });
+
+    await transporter.sendMail({
+      from: process.env.MAIL_USER,
+      to: email,
+      subject: subject,
+      text: text,
+    });
+
+    console.log('Email sent successfully');
   } catch (error) {
+    console.error('Error sending email:', error);
     throw new Error('Error sending email');
   }
-};
+});
 
 export default sendEmail;
-
-// sendEmail({
-//   email: 'alberskif@gmail.com',
-//   subject: 'Test Email',
-//   message: 'This is a test email from the backend',
-// });

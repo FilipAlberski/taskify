@@ -76,7 +76,7 @@ export const forgotPassword = createAsyncThunk(
       };
 
       await axios.post(
-        `${backendURL}/api/user/forgot-password`,
+        `${backendURL}/api/password-reset`,
         { email },
         config
       );

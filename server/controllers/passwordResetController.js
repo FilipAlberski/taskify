@@ -42,11 +42,7 @@ const forgotPassword = asyncHandler(async (req, res) => {
         <a href=${resetPasswordLink} clicktracking=off>${resetPasswordLink}</a>
         `;
     try {
-      sendEmail({
-        email: user.email,
-        subject: 'Password Reset Request',
-        message: message,
-      });
+      sendEmail(user.email, 'Password reset request', message);
       res.status(200).json({ success: true, data: 'Email sent' });
     } catch (error) {
       res.status(500);
