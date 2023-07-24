@@ -15,5 +15,4 @@
 -   if you use yarn `yarn yarninstallall`
 -   if npm `npm npminstallall`
 
-https://www.bezkoder.com/react-hooks-redux-login-registration-example/
-https://www.bezkoder.com/react-redux-login-example-toolkit-hooks/
+https://dev.to/cyberwolves/how-to-implement-password-reset-via-email-in-node-js-132m
