@@ -34,7 +34,7 @@ const forgotPassword = asyncHandler(async (req, res) => {
       });
     }
 
-    const resetPasswordLink = `${process.env.CLIENT_BASE_URL}/reset-password/${user._id}/${token.token}`;
+    const resetPasswordLink = `${process.env.CLIENT_BASE_URL}/password-reset/${user._id}/${token.token}`;
 
     const message = `
         <h1>You have requested a password reset</h1>

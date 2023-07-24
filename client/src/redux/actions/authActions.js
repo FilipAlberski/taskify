@@ -89,3 +89,30 @@ export const forgotPassword = createAsyncThunk(
     }
   }
 );
+
+//reset password
+
+export const resetPassword = createAsyncThunk(
+  'user/resetPassword',
+  async ({ password, token, userId }, { rejectWithValue }) => {
+    try {
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      };
+
+      await axios.post(
+        `${backendURL}/api/password-reset/${userId}/${token}`,
+        { password },
+        config
+      );
+    } catch (error) {
+      if (error.response && error.response.data.message) {
+        return rejectWithValue(error.response.data.message);
+      } else {
+        return rejectWithValue(error.message);
+      }
+    }
+  }
+);

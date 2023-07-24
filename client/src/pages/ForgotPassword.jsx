@@ -14,6 +14,7 @@ import {
 import { forgotPassword } from '../redux/actions/authActions';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
+import Alerts from '../components/Alerts';
 
 const ForgotPassword = () => {
   const dispatch = useDispatch();
@@ -36,6 +37,7 @@ const ForgotPassword = () => {
         <Typography component="h1" variant="h5">
           Forgot Password
         </Typography>
+
         <Box
           component="form"
           sx={{ mt: 3 }}

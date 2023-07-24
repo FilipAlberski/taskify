@@ -26,7 +26,7 @@ const router = createBrowserRouter(
       <Route path="test" element={<Test />} />
       <Route path="password-reset" element={<ForgotPassword />} />
       <Route
-        path="reset-password/:userId/:token"
+        path="password-reset/:userId/:token"
         element={<PasswordReset />}
       />
 
