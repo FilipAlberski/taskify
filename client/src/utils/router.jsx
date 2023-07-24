@@ -11,6 +11,7 @@ import RegisterPage from '../pages/RegisterPage.jsx';
 import ForgotPassword from '../pages/ForgotPassword.jsx';
 import WelcomePage from '../pages/WelcomePage.jsx';
 import NotFoundPage from '../pages/NotFoundPage.jsx';
+import PasswordReset from '../pages/PasswordReset.jsx';
 
 import ProtectedRoute from './ProtectedRoute.jsx';
 
@@ -24,6 +25,10 @@ const router = createBrowserRouter(
       <Route path="register" element={<RegisterPage />} />
       <Route path="test" element={<Test />} />
       <Route path="password-reset" element={<ForgotPassword />} />
+      <Route
+        path="reset-password/:userId/:token"
+        element={<PasswordReset />}
+      />
 
       <Route element={<ProtectedRoute />}>
         <Route path="dashboard" element={<SharedLayout />}></Route>
