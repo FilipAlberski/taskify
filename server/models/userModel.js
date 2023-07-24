@@ -1,6 +1,7 @@
 import bcrypt from 'bcryptjs';
 import { mongoose } from 'mongoose';
 import jwt from 'jsonwebtoken';
+import Joi from 'joi';
 
 const userSchema = mongoose.Schema(
   {
@@ -21,14 +22,6 @@ const userSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    resetPasswordToken: {
-      type: String,
-      required: false,
-    },
-    resetPasswordExpire: {
-      type: Date,
-      required: false,
-    },
   },
   {
     timestamps: true,
@@ -41,21 +34,6 @@ userSchema.pre('save', async function () {
   this.password = await bcrypt.hash(this.password, salt);
 });
 
-userSchema.methods.getResetPasswordToken = async function () {
-  try {
-    const resetToken = await jwt.sign(
-      { id: this._id.toString() },
-      process.env.JWT_SECRET,
-      {
-        expiresIn: '1h',
-      }
-    );
-    return resetToken;
-  } catch (error) {
-    throw new Error('Failed to generate reset token');
-  }
-};
-
 // extend matchPassword function unto userSchema
 userSchema.methods.matchPassword = async function (enteredPassword) {
   return await bcrypt.compare(enteredPassword, this.password);
@@ -63,4 +41,15 @@ userSchema.methods.matchPassword = async function (enteredPassword) {
 
 const User = mongoose.model('User', userSchema);
 
-export default User;
+const validate = (user) => {
+  const schema = Joi.object({
+    firstName: Joi.string().required(),
+    lastName: Joi.string().optional(),
+    email: Joi.string().email().required(),
+    password: Joi.string().required(),
+  });
+
+  return schema.validate(user);
+};
+
+export { User, validate };

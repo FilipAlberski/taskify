@@ -9,4 +9,9 @@ router.post('/login', userController.loginUser);
 router.route('/profile').get(protect, userController.getUserProfile);
 router.post('/forgot-password', userController.forgotPassword);
 
+router.post(
+  '/reset-password/:userId/:resetToken',
+  userController.resetPassword
+);
+
 export default router;

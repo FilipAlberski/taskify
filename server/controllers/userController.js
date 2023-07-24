@@ -1,7 +1,9 @@
 import asyncHandler from 'express-async-handler';
-import User from '../models/userModel.js';
+import { User } from '../models/userModel.js';
 import generateToken from '../utils/generateToken.js';
 import sendEmail from '../utils/sendEmail.js';
+import Joi from 'joi';
+import { Token } from '../models/tokenModel.js';
 
 const registerUser = asyncHandler(async (req, res) => {
   const { firstName, email, password, lastName } = req.body;
@@ -71,59 +73,57 @@ const getUserProfile = asyncHandler(async (req, res) => {
   }
 });
 
-const forgotPassword = async (req, res) => {
-  const { email } = req.body;
-
+const forgotPassword = asyncHandler(async (req, res) => {
   try {
-    // Check if the user exists in the database
-    const user = await User.findOne({ email });
+    const schema = Joi.object({
+      email: Joi.string().email().required(),
+    });
+
+    const { error } = schema.validate(req.body);
+
+    if (error) {
+      res.status(400);
+      throw new Error(error.details[0].message);
+    }
+
+    const user = await User.findOne({ email: req.body.email });
+
     if (!user) {
-      return res.status(404).json({ error: 'User not found' });
+      res.status(404);
+      throw new Error('User not found');
+    }
+    let Token = await Token.findOne({ userId: user._id });
+
+    if (!Token) {
+      token = await new Token({
+        userId: user._id,
+        token: crypto.randomBytes(16).toString('hex'),
+      }).save();
     }
 
-    // Generate the reset token (JWT)
-    const resetToken = await user.getResetPasswordToken();
+    const link = `${process.env.BASE_URL}/reset-password/${user._id}/`;
 
-    // Save the reset token and expiration time in the user document
-    user.resetPasswordToken = resetToken;
-    user.resetPasswordExpire = Date.now() + 3600000; // Valid for 1 hour
-    await user.save();
+    await sendEmail({
+      email: user.email,
+      subject: 'Password Reset Request',
+      message: `Please click on the following link ${link} to reset your password. \n\n If you did not request this, please ignore this email and your password will remain unchanged.`,
+    });
 
-    // Send the password reset link to the user's email
-    // Implement this part using your preferred email service or library
-    // Include the resetToken in the reset link
-
-    const resetUrl = `http://localhost:5173/reset-password/${resetToken}`;
-
-    const message = `
-      <h1>You have requested a password reset</h1>
-      <p>Please go to this link to reset your password</p>
-      <a href=${resetUrl} clicktracking=off>${resetUrl}</a>
-    `;
-
-    try {
-      await sendEmail({
-        email: user.email.toString(),
-        subject: 'Password Reset Request',
-        message: message,
-      });
-    } catch (error) {
-      console.log(error);
-      user.resetPasswordToken = undefined;
-      user.resetPasswordExpire = undefined;
-
-      await user.save();
-
-      throw new Error('Email could not be sent');
-    }
-
-    res
-      .status(200)
-      .json({ message: 'Password reset link sent to your email' });
+    res.json({
+      message: 'A reset email has been sent to your email address.',
+    });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Server error' });
+    res.status(500);
+    throw new Error(error.message);
   }
-};
+});
 
-export { registerUser, loginUser, getUserProfile, forgotPassword };
+const resetPassword = asyncHandler(async (req, res) => {});
+
+export {
+  registerUser,
+  loginUser,
+  getUserProfile,
+  forgotPassword,
+  resetPassword,
+};
