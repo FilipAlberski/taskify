@@ -3,9 +3,10 @@ import cors from 'cors';
 import express from 'express';
 import dotenv from 'dotenv';
 import colors from 'colors';
-import connectDB from './config/db.js';
 import morgan from 'morgan';
-//routes
+import connectDB from './config/db.js';
+
+// Import routes and middleware
 import passwordResetRoutes from './routes/passwordResetRoutes.js';
 import userRoutes from './routes/userRoutes.js';
 import {
@@ -16,37 +17,31 @@ import {
 const __dirname = path.resolve();
 
 // Deployment configuration
-//configure env file in dev mode
 dotenv.config();
 
-// configure env file in production
+// Configure env file in production if NODE_ENV is not set
 if (process.env.NODE_ENV === undefined) {
   dotenv.config({ path: '../.env' });
 }
 
-// Connect to database
+// Connect to the database
 connectDB();
 
+// Create the Express app
 const app = express();
 
-// Body parser
+// Middlewares
 app.use(express.json());
+app.use(cors({ origin: '*' }));
 
-// CORS
-app.use(
-  cors({
-    origin: '*',
-  })
-);
-
-// Morgan
-
+// Morgan for logging
 app.use(morgan('dev'));
 
 // API routes
 app.use('/api/user', userRoutes);
 app.use('/api/password-reset', passwordResetRoutes);
 
+// Serve frontend in production
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '/frontend/build')));
 
@@ -57,7 +52,7 @@ if (process.env.NODE_ENV === 'production') {
   );
 }
 
-// Middleware
+// Error handling middleware
 app.use(notFound);
 app.use(errorHandler);
 
