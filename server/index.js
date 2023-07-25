@@ -4,7 +4,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import colors from 'colors';
 import connectDB from './config/db.js';
-
+import morgan from 'morgan';
 //routes
 import passwordResetRoutes from './routes/passwordResetRoutes.js';
 import userRoutes from './routes/userRoutes.js';
@@ -38,6 +38,10 @@ app.use(
     origin: '*',
   })
 );
+
+// Morgan
+
+app.use(morgan('dev'));
 
 // API routes
 app.use('/api/user', userRoutes);
