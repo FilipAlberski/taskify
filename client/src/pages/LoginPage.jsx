@@ -55,6 +55,7 @@ const LoginPage = () => {
           Sign in
         </Typography>
         {error && <Alerts type="error" text={error} />}
+
         <Box
           component="form"
           onSubmit={handleSubmit(onSubmit)}
