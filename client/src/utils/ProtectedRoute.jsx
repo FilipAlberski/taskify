@@ -1,11 +1,19 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useGetUserDetailsQuery } from '../services/authService';
 
-import { Button, Typography, Container, Box } from '@mui/material';
+import {
+  Button,
+  Typography,
+  Container,
+  Box,
+  CircularProgress,
+} from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import { setCredentials } from '../redux/slices/authSlice';
 
 import { Outlet } from 'react-router-dom';
+import { useEffect } from 'react';
 
 const ProtectedRoute = () => {
   const { userInfo } = useSelector((state) => state.auth);
@@ -16,7 +24,20 @@ const ProtectedRoute = () => {
     pollingInterval: 900000,
   });
 
-  console.log(data);
+  useEffect(() => {
+    if (data) {
+      dispatch(setCredentials(data));
+    }
+  }, [data, dispatch]);
+
+  if (isFetching)
+    return (
+      <Container component="main" maxWidth="xs">
+        <Box>
+          <CircularProgress />
+        </Box>
+      </Container>
+    );
 
   if (!userInfo) {
     return (
