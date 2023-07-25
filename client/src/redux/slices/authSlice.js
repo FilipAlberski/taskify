@@ -35,6 +35,10 @@ const authSlice = createSlice({
     setCredentials: (state, { payload }) => {
       state.userInfo = payload;
     },
+    setLoading: (state, { payload }) => {
+      state.loading = payload;
+    },
+
     clearAlert: (state) => {
       state.error = null;
       state.success = false;
@@ -100,7 +104,7 @@ const authSlice = createSlice({
   },
 });
 
-export const { logout, setCredentials, clearAlert } =
+export const { logout, setCredentials, clearAlert, setLoading } =
   authSlice.actions;
 
 export default authSlice.reducer;

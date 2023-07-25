@@ -1,71 +1,37 @@
-import { useSelector, useDispatch } from 'react-redux';
-import { useGetUserDetailsQuery } from '../services/authService';
-
-import {
-  Button,
-  Typography,
-  Container,
-  Box,
-  CircularProgress,
-} from '@mui/material';
-import { Link as RouterLink } from 'react-router-dom';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import { setCredentials } from '../redux/slices/authSlice';
-
-import { Outlet } from 'react-router-dom';
-import { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { Link, Outlet } from 'react-router-dom';
 
 const ProtectedRoute = () => {
-  const { userInfo } = useSelector((state) => state.auth);
-  const dispatch = useDispatch();
+  const { userInfo, userToken, loading } = useSelector(
+    (state) => state.auth
+  );
 
-  // automatically authenticate user if token is found
-  const { data, isFetching } = useGetUserDetailsQuery('userDetails', {
-    pollingInterval: 900000,
-  });
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
-    if (data) {
-      dispatch(setCredentials(data));
+    if (userInfo) {
+      setIsAuthenticated(true);
     }
-  }, [data, dispatch]);
+  }, [userInfo]);
 
-  if (isFetching)
-    return (
-      <Container component="main" maxWidth="xs">
-        <Box>
-          <CircularProgress />
-        </Box>
-      </Container>
-    );
+  if (loading) return <div>Loading...</div>;
 
-  if (!userInfo) {
+  if (!isAuthenticated) {
     return (
-      <Container component="main" maxWidth="xs">
-        <Box
-          display="flex"
-          flexDirection="column"
-          alignItems="center"
-          mt={8}
-        >
-          <LockOutlinedIcon />
-          <Typography component="h1" variant="h5">
-            Unauthorized
-          </Typography>
-          <Button
-            component={RouterLink}
-            to="/login"
-            variant="contained"
-            color="primary"
-          >
-            Login
-          </Button>
-        </Box>
-      </Container>
+      <div>
+        <h1>Not Authenticated</h1>
+        <Link to="/login">Login</Link>
+      </div>
     );
   }
 
-  return <Outlet />;
+  return (
+    <div>
+      <h1>Authenticated</h1>
+      <Outlet />
+    </div>
+  );
 };
 
 export default ProtectedRoute;

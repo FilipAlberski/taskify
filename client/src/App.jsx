@@ -9,6 +9,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 //redux
 import { useSelector } from 'react-redux';
 import Header from './utils/Header';
+
 function App() {
   const uiTheme = useSelector((state) => state.ui.theme);
 
@@ -16,7 +17,6 @@ function App() {
     <ThemeProvider
       theme={uiTheme === 'dark' ? darkTheme : lightTheme}
     >
-      <Header />
       <CssBaseline />
 
       <RouterProvider router={router} />
