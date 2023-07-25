@@ -10,11 +10,12 @@ const userToken = localStorage.getItem('userToken')
   ? localStorage.getItem('userToken')
   : null;
 
-const userInfo = localStorage.getItem('userInfo');
+// const userInfo = localStorage.getItem('userInfo')
 
 const initialState = {
   loading: false,
-  userInfo: userInfo ? JSON.parse(userInfo) : null,
+  // userInfo: userInfo ? JSON.parse(userInfo) : null,
+  userInfo: null,
   userToken,
   error: null,
   success: false,
