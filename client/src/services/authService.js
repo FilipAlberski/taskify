@@ -18,7 +18,7 @@ export const authApi = createApi({
     },
   }),
   endpoints: (build) => ({
-    getDetails: build.query({
+    getUserDetails: build.query({
       query: () => ({
         url: 'api/auth/current',
         method: 'GET',
@@ -28,4 +28,5 @@ export const authApi = createApi({
 });
 
 // export react hook
-export const { useGetDetailsQuery } = authApi;
+
+export const { useGetUserDetailsQuery } = authApi;
