@@ -4,7 +4,7 @@ import {
   Route,
 } from 'react-router-dom';
 
-import SharedLayout from '../pages/SharedLayout.jsx';
+import SharedLayout from '../pages/SharedLayout/SharedLayout.jsx';
 
 import LoginPage from '../pages/LoginPage.jsx';
 import RegisterPage from '../pages/RegisterPage.jsx';
@@ -31,7 +31,10 @@ const router = createBrowserRouter(
       />
 
       <Route element={<ProtectedRoute />}>
-        <Route path="dashboard" element={<SharedLayout />}></Route>
+        <Route path="dashboard" element={<SharedLayout />}>
+          <Route path="*" element={<NotFoundPage />} />
+          <Route path="test" element={<Test />} />
+        </Route>
       </Route>
 
       <Route path="*" element={<NotFoundPage />} />

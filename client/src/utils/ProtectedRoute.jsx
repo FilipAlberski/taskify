@@ -9,7 +9,6 @@ import { Outlet } from 'react-router-dom';
 const ProtectedRoute = () => {
   const { userInfo } = useSelector((state) => state.auth);
 
-  // show unauthorized screen if no user is found in redux store
   if (!userInfo) {
     return (
       <Container component="main" maxWidth="xs">

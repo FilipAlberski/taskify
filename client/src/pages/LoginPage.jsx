@@ -36,7 +36,7 @@ const LoginPage = () => {
 
   useEffect(() => {
     if (userInfo) {
-      navigate('/'); //do zmiany
+      navigate('/dashboard'); //do zmiany
     }
   }, [navigate, userInfo]);
 
