@@ -57,20 +57,19 @@ const loginUser = asyncHandler(async (req, res) => {
   }
 });
 
-const getUserProfile = asyncHandler(async (req, res) => {
-  // req.user was set in authMiddleware.js
-  const user = await User.findById(req.user._id);
+const getCurrentUser = asyncHandler(async (req, res) => {
+  const user = req.user; // Assuming req.user is set by the protect middleware
 
   if (user) {
     res.json({
-      id: user._id,
+      _id: user._id,
       firstName: user.firstName,
       email: user.email,
     });
   } else {
-    res.status(404);
+    res.status(401);
     throw new Error('User not found');
   }
 });
 
-export { registerUser, loginUser, getUserProfile };
+export { registerUser, loginUser, getCurrentUser };

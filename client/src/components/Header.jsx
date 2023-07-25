@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { useGetUserDetailsQuery } from '../redux/services/userApi';
+import { useGetUserDetailsQuery } from '../services/authService';
 
-const Header = () => {
+const Header = ({ children }) => {
   const { userInfo } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
@@ -13,6 +13,6 @@ const Header = () => {
 
   console.log(data); // user object
 
-  return <header>{/* header markup */}</header>;
+  return <header>{children}</header>;
 };
 export default Header;

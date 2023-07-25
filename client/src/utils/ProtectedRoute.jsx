@@ -1,4 +1,5 @@
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { useGetUserDetailsQuery } from '../services/authService';
 
 import { Button, Typography, Container, Box } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
@@ -8,6 +9,14 @@ import { Outlet } from 'react-router-dom';
 
 const ProtectedRoute = () => {
   const { userInfo } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+
+  // automatically authenticate user if token is found
+  const { data, isFetching } = useGetUserDetailsQuery('userDetails', {
+    pollingInterval: 900000,
+  });
+
+  console.log(data);
 
   if (!userInfo) {
     return (

@@ -4,6 +4,8 @@ import {
   Route,
 } from 'react-router-dom';
 
+import Header from '../components/Header.jsx';
+
 import SharedLayout from '../pages/SharedLayout/SharedLayout.jsx';
 
 import LoginPage from '../pages/LoginPage.jsx';
