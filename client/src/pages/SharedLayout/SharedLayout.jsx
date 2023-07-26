@@ -1,81 +1,77 @@
-import React, { useState } from 'react';
-import { Box, AppBar, IconButton } from '@mui/material';
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import Typography from '@mui/material/Typography';
-
-const drawerWidth = 200; // Initial width of the drawer
-const closedDrawerWidth = 60; // Width of the drawer when closed
+import React from 'react';
+import {
+  useTheme,
+  useMediaQuery,
+  AppBar,
+  Toolbar,
+  Typography,
+  IconButton,
+  Drawer,
+  List,
+  ListItemButton,
+  ListItemText,
+} from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
 
 const SharedLayout = () => {
-  const [isDrawerOpen, setIsDrawerOpen] = useState(true); // Initial state of the drawer (open)
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const [openDrawer, setOpenDrawer] = React.useState(false);
 
   const toggleDrawer = () => {
-    setIsDrawerOpen(!isDrawerOpen);
+    setOpenDrawer(!openDrawer);
   };
 
-  const getDrawerWidth = () => {
-    return isDrawerOpen ? drawerWidth : closedDrawerWidth;
+  const closeDrawer = () => {
+    setOpenDrawer(false);
   };
 
   return (
-    <Box
-      sx={{
-        display: 'flex',
-      }}
-    >
-      <Box
-        sx={{
-          width: getDrawerWidth(),
-          flexShrink: 0,
-          transition: 'width 0.2s',
-          backgroundColor: 'red',
-          height: '100vh',
-        }}
-      >
-        <Box
+    <div>
+      <AppBar position="static">
+        <Toolbar
           sx={{
-            display: 'flex',
-            alignItems: 'center',
-            padding: '8px 16px',
-            justifyContent: 'flex-end',
+            left: isMobile ? '0px' : '250px',
+            width: isMobile ? '100%' : 'calc(100% - 250px)',
           }}
         >
-          {isDrawerOpen ? (
-            <IconButton onClick={toggleDrawer}>
-              <ChevronLeftIcon />
-            </IconButton>
-          ) : (
-            <IconButton onClick={toggleDrawer}>
-              <ChevronRightIcon />
+          {isMobile && (
+            <IconButton
+              edge="start"
+              color="inherit"
+              aria-label="menu"
+              onClick={toggleDrawer}
+            >
+              <MenuIcon />
             </IconButton>
           )}
-        </Box>
-        {isDrawerOpen && (
-          <Box sx={{ padding: '8px 16px' }}>
-            {/* Add other large-size icons and text here */}
-            <Typography variant="h6">Drawer</Typography>
-            <Typography>essa</Typography>
-          </Box>
-        )}
-      </Box>
-      <AppBar
-        sx={{
-          left: getDrawerWidth(),
-          transition: 'left 0.2s',
-        }}
-      >
-        teteststetsetesst
+        </Toolbar>
       </AppBar>
-      <Box
-        sx={{
-          flexGrow: 1,
-          padding: 3,
+      <Drawer
+        open={isMobile ? openDrawer : true}
+        variant={isMobile ? 'temporary' : 'permanent'}
+        ModalProps={{
+          onBackdropClick: closeDrawer,
         }}
       >
-        {/* Add your main content here */}
-      </Box>
-    </Box>
+        <Typography variant="h6" sx={{ p: 2 }}>
+          Taskify
+        </Typography>
+
+        <List sx={{ width: 250 }}>
+          <ListItemButton>
+            <ListItemText primary="Option 1" onClick={closeDrawer} />
+          </ListItemButton>
+          <ListItemButton>
+            <ListItemText primary="Option 2" />
+          </ListItemButton>
+          <ListItemButton>
+            <ListItemText primary="Option 3" />
+          </ListItemButton>
+        </List>
+      </Drawer>
+      <div>{/* Your main content goes here */}</div>
+    </div>
   );
 };
 
