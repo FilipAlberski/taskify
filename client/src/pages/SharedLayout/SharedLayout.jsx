@@ -13,8 +13,11 @@ import {
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 
+import { Outlet } from 'react-router-dom';
+
 const SharedLayout = () => {
   const theme = useTheme();
+  console.log(theme);
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const [openDrawer, setOpenDrawer] = React.useState(false);
 
@@ -53,6 +56,11 @@ const SharedLayout = () => {
         ModalProps={{
           onBackdropClick: closeDrawer,
         }}
+        sx={{
+          '& .MuiDrawer-paper': {
+            bgcolor: 'background.default',
+          },
+        }}
       >
         <Typography variant="h6" sx={{ p: 2 }}>
           Taskify
@@ -70,7 +78,7 @@ const SharedLayout = () => {
           </ListItemButton>
         </List>
       </Drawer>
-      <div>{/* Your main content goes here */}</div>
+      <Outlet />
     </div>
   );
 };
