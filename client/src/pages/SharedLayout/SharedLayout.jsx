@@ -1,42 +1,21 @@
 import React, { useState } from 'react';
-import { Button, Box, Drawer } from '@mui/material';
+import { Box, AppBar, IconButton } from '@mui/material';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import Typography from '@mui/material/Typography';
-import { Resizable } from 'react-resizable';
 
 const drawerWidth = 200; // Initial width of the drawer
+const closedDrawerWidth = 60; // Width of the drawer when closed
 
 const SharedLayout = () => {
-  const [drawerWidth, setDrawerWidth] = useState(200); // Initial state of the drawer width
+  const [isDrawerOpen, setIsDrawerOpen] = useState(true); // Initial state of the drawer (open)
 
-  const handleResize = (event, { size }) => {
-    setDrawerWidth(size.width);
+  const toggleDrawer = () => {
+    setIsDrawerOpen(!isDrawerOpen);
   };
 
-  const renderDrawerContent = () => {
-    if (drawerWidth < 150) {
-      // Small size: show only icons
-      return (
-        <div>
-          <Button onClick={() => setDrawerWidth(200)}>
-            <ChevronRightIcon />
-          </Button>
-          {/* Add other small-size icons here */}
-        </div>
-      );
-    } else {
-      // Large size: show icons and text
-      return (
-        <div>
-          <Button onClick={() => setDrawerWidth(50)}>
-            <ChevronLeftIcon />
-          </Button>
-          {/* Add other large-size icons and text here */}
-          <Typography variant="h6">Drawer</Typography>
-        </div>
-      );
-    }
+  const getDrawerWidth = () => {
+    return isDrawerOpen ? drawerWidth : closedDrawerWidth;
   };
 
   return (
@@ -45,38 +24,49 @@ const SharedLayout = () => {
         display: 'flex',
       }}
     >
-      <Resizable
-        width={drawerWidth}
-        height={Infinity}
-        onResize={handleResize}
-        minConstraints={[50, Infinity]}
-        maxConstraints={[400, Infinity]}
+      <Box
+        sx={{
+          width: getDrawerWidth(),
+          flexShrink: 0,
+          transition: 'width 0.2s',
+          backgroundColor: 'red',
+          height: '100vh',
+        }}
       >
-        <Drawer
-          variant="permanent"
+        <Box
           sx={{
-            width: drawerWidth,
-            flexShrink: 0,
+            display: 'flex',
+            alignItems: 'center',
+            padding: '8px 16px',
+            justifyContent: 'flex-end',
           }}
-          classes={{
-            paper: {
-              width: drawerWidth,
-            },
-          }}
-          anchor="left"
         >
-          <Box
-            sx={{
-              display: 'flex',
-              alignItems: 'center',
-              padding: '8px 16px',
-              justifyContent: 'flex-end',
-            }}
-          >
-            {renderDrawerContent()}
+          {isDrawerOpen ? (
+            <IconButton onClick={toggleDrawer}>
+              <ChevronLeftIcon />
+            </IconButton>
+          ) : (
+            <IconButton onClick={toggleDrawer}>
+              <ChevronRightIcon />
+            </IconButton>
+          )}
+        </Box>
+        {isDrawerOpen && (
+          <Box sx={{ padding: '8px 16px' }}>
+            {/* Add other large-size icons and text here */}
+            <Typography variant="h6">Drawer</Typography>
+            <Typography>essa</Typography>
           </Box>
-        </Drawer>
-      </Resizable>
+        )}
+      </Box>
+      <AppBar
+        sx={{
+          left: getDrawerWidth(),
+          transition: 'left 0.2s',
+        }}
+      >
+        teteststetsetesst
+      </AppBar>
       <Box
         sx={{
           flexGrow: 1,
