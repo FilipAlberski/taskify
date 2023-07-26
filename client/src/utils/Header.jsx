@@ -8,7 +8,9 @@ import {
 import { useGetUserDetailsQuery } from '../services/authService';
 
 const Header = () => {
-  const { userInfo, userToken } = useSelector((state) => state.auth);
+  const { userInfo, userToken, loading } = useSelector(
+    (state) => state.auth
+  );
   const dispatch = useDispatch();
 
   // Automatically authenticate user if token is found
@@ -16,6 +18,18 @@ const Header = () => {
     pollingInterval: 900000, // 15 mins
     skip: !userToken,
   });
+
+  useEffect(() => {
+    if (isFetching) {
+      dispatch(setLoading(true));
+    } else {
+      dispatch(setLoading(false));
+    }
+  }, [isFetching, dispatch]);
+
+  useEffect(() => {
+    console.log(loading, userInfo, userToken);
+  }, [loading, userInfo, userToken]);
 
   useEffect(() => {
     if (data) {
