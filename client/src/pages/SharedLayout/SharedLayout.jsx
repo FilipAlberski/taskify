@@ -1,77 +1,111 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
 import {
-  AppBar,
-  Toolbar,
-  Typography,
   Drawer,
+  Box,
+  CssBaseline,
+  Typography,
+  Toolbar,
   List,
   ListItem,
+  ListItemIcon,
   ListItemText,
-  Container,
-  CssBaseline,
+  Divider,
+  IconButton,
 } from '@mui/material';
-
+import MenuIcon from '@mui/icons-material/Menu';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import InboxIcon from '@mui/icons-material/MoveToInbox';
+import MailIcon from '@mui/icons-material/Mail';
 import { Outlet } from 'react-router-dom';
 
 const drawerWidth = 240;
 
-const appBarStyle = {
-  zIndex: 1300, // Set the z-index to keep the AppBar above the drawer
-};
-
-const drawerStyle = {
-  width: drawerWidth,
-  flexShrink: 0,
-};
-
-const drawerPaperStyle = {
-  width: drawerWidth,
-};
-
-const contentStyle = {
-  flexGrow: 1,
-  padding: '20px', // Adjust padding as needed
-};
+const DrawerHeader = () => (
+  <Box
+    display="flex"
+    alignItems="center"
+    justifyContent="flex-end"
+    padding="8px"
+  >
+    <div>Logo</div>
+  </Box>
+);
 
 const SharedLayout = () => {
+  const [open, setOpen] = useState(false);
+
+  const handleDrawerOpen = () => {
+    setOpen(true);
+  };
+
+  const handleDrawerClose = () => {
+    setOpen(false);
+  };
+
   return (
-    <div style={{ display: 'flex' }}>
-      <CssBaseline />
-      <AppBar position="fixed" style={appBarStyle}>
-        <Toolbar>
-          <Typography variant="h6" noWrap>
-            My App
-          </Typography>
-        </Toolbar>
-      </AppBar>
-      <Drawer
-        variant="permanent"
-        anchor="left"
-        style={drawerStyle}
-        classes={{
-          paper: drawerPaperStyle,
-        }}
-      >
+    <Box sx={{ display: 'flex' }}>
+      <Drawer variant="persistent" anchor="left" open={open}>
+        <DrawerHeader>
+          <IconButton onClick={handleDrawerClose}>
+            {open ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+          </IconButton>
+        </DrawerHeader>
+        <Divider />
         <List>
-          <ListItem button component={Link} to="/">
-            <ListItemText primary="Home" />
-          </ListItem>
-          <ListItem button component={Link} to="/about">
-            <ListItemText primary="About" />
-          </ListItem>
-          <ListItem button component={Link} to="/contact">
-            <ListItemText primary="Contact" />
-          </ListItem>
+          {['Inbox', 'Starred', 'Send email', 'Drafts'].map(
+            (text, index) => (
+              <ListItem button key={text}>
+                <ListItemIcon>
+                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                </ListItemIcon>
+                <ListItemText primary={text} />
+              </ListItem>
+            )
+          )}
+        </List>
+        <Divider />
+        <List>
+          {['All mail', 'Trash', 'Spam'].map((text, index) => (
+            <ListItem button key={text}>
+              <ListItemIcon>
+                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+              </ListItemIcon>
+              <ListItemText primary={text} />
+            </ListItem>
+          ))}
         </List>
       </Drawer>
-      <main style={contentStyle}>
-        <Toolbar />
-        <Container maxWidth="lg">
-          <Outlet />
-        </Container>
-      </main>
-    </div>
+      <Box
+        component="main"
+        sx={{
+          flexGrow: 1,
+          p: 3,
+          transition: 'margin-left 0.2s',
+          marginLeft: open ? `${drawerWidth}px` : 0,
+        }}
+      >
+        <Toolbar>
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            onClick={handleDrawerOpen}
+            edge="start"
+            sx={{
+              marginRight: 5,
+              ...(open && { display: 'none' }),
+            }}
+          >
+            <MenuIcon />
+          </IconButton>
+          <Typography variant="h6" noWrap component="div">
+            Mini variant drawer
+          </Typography>
+        </Toolbar>
+        <DrawerHeader />
+        <Outlet />
+      </Box>
+    </Box>
   );
 };
 

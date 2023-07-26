@@ -28,10 +28,6 @@ const Header = () => {
   }, [isFetching, dispatch]);
 
   useEffect(() => {
-    console.log(loading, userInfo, userToken);
-  }, [loading, userInfo, userToken]);
-
-  useEffect(() => {
     if (data) {
       dispatch(setCredentials(data));
     }
