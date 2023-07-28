@@ -55,6 +55,8 @@ const forgotPassword = asyncHandler(async (req, res) => {
 });
 
 const resetPassword = asyncHandler(async (req, res) => {
+  console.log(req.body);
+  console.log(req.params);
   try {
     const schema = Joi.object({
       password: Joi.string().min(6).required(),
@@ -71,7 +73,7 @@ const resetPassword = asyncHandler(async (req, res) => {
 
     if (!user) {
       res.status(404);
-      throw new Error('invalid Link or expired');
+      throw new Error('Invalid link or user not found');
     }
 
     const token = await Token.findOne({
@@ -81,21 +83,27 @@ const resetPassword = asyncHandler(async (req, res) => {
 
     if (!token) {
       res.status(404);
-      throw new Error('invalid Link or expired');
+      throw new Error('Invalid link or token not found');
     }
 
     user.password = req.body.password;
+
     await user.save();
 
-    await token.delete();
+    if (token.delete) {
+      await token.delete(); // Make sure token.delete() is available before calling it
+    } else {
+      console.log('Token deletion function is not available.');
+    }
 
+    console.log('Password reset successful');
     res
       .status(200)
       .json({ success: true, data: 'Password reset successful' });
   } catch (error) {
+    console.error(error);
     res.status(401);
     throw new Error('Problem with reset password');
   }
 });
-
 export { forgotPassword, resetPassword };

@@ -11,6 +11,8 @@ import {
   Box,
 } from '@mui/material';
 
+import { useSelector } from 'react-redux';
+
 import { forgotPassword } from '../redux/actions/authActions';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
@@ -23,6 +25,10 @@ const ForgotPassword = () => {
   const onSubmit = (data) => {
     dispatch(forgotPassword(data));
   };
+
+  const { loading, error, userInfo, success } = useSelector(
+    (state) => state.auth
+  );
 
   return (
     <Container component="main" maxWidth="xs">
