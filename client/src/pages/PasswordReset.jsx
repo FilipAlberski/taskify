@@ -9,22 +9,35 @@ import {
   Box,
 } from '@mui/material';
 
-// import { resetPassword } from '../redux/actions/authActions';
+import { useSelector } from 'react-redux';
+
+import { resetPassword } from '../redux/actions/authActions';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import Alerts from '../components/Alerts';
+import { setAlert } from '../redux/slices/authSlice';
 
 import { useParams } from 'react-router-dom';
 
 const PasswordReset = () => {
   const { userId, token } = useParams();
+  const { loading, error, userInfo } = useSelector(
+    (state) => state.auth
+  );
 
   const dispatch = useDispatch();
 
   const { register, handleSubmit } = useForm();
 
   const onSubmit = (data) => {
-    // dispatch(resetPassword(data, userId, token));
+    console.log(data);
+    if (data.password !== data.confirmPassword) {
+      dispatch(setAlert("Passwords don't match"));
+    } else {
+      dispatch(
+        resetPassword({ userId, token, password: data.password })
+      );
+    }
   };
 
   return (
@@ -40,7 +53,7 @@ const PasswordReset = () => {
         <Typography component="h1" variant="h5" p={2}>
           Reset Password
         </Typography>
-        <Alerts />
+        {error && <Alerts type="error" text={error} />}
         <Box
           component="form"
           sx={{ mt: 3 }}
