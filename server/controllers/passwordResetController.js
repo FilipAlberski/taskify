@@ -5,7 +5,7 @@ import crypto from 'crypto';
 import { Token } from '../models/tokenModel.js';
 import Joi from 'joi';
 
-const forgotPassword = asyncHandler(async (req, res) => {
+const forgotPassword = asyncHandler(async (req, res, next) => {
   try {
     const schema = Joi.object({
       email: Joi.string().email().required(),
@@ -41,16 +41,12 @@ const forgotPassword = asyncHandler(async (req, res) => {
         <p>Please go to this link to reset your password</p>
         <a href=${resetPasswordLink} clicktracking=off>${resetPasswordLink}</a>
         `;
-    try {
-      sendEmail(user.email, 'Password reset request', message);
-      res.status(200).json({ success: true, data: 'Email sent' });
-    } catch (error) {
-      res.status(500);
-      throw new Error('Email could not be sent');
-    }
+
+    await sendEmail(user.email, 'Password reset request', message);
+
+    res.status(200).json({ success: true, data: 'Email sent' });
   } catch (error) {
-    res.status(401);
-    throw new Error('Problem with forgot password');
+    next(error); // Pass the error to the error handler middleware
   }
 });
 

@@ -1,18 +1,18 @@
 import nodemailer from 'nodemailer';
 import asyncHandler from 'express-async-handler';
 
-const sendEmail = asyncHandler(async (email, subject, text) => {
-  try {
-    const transporter = nodemailer.createTransport({
-      host: process.env.MAIL_HOST,
-      port: 465,
-      secure: true,
-      auth: {
-        user: process.env.MAIL_USER,
-        pass: process.env.MAIL_PASS,
-      },
-    });
+const sendEmail = async (email, subject, text) => {
+  const transporter = nodemailer.createTransport({
+    host: process.env.MAIL_HOST,
+    port: 465,
+    secure: true,
+    auth: {
+      user: process.env.MAIL_USER,
+      pass: process.env.MAIL_PASS,
+    },
+  });
 
+  try {
     await transporter.sendMail({
       from: process.env.MAIL_USER,
       to: email,
@@ -23,8 +23,9 @@ const sendEmail = asyncHandler(async (email, subject, text) => {
     console.log('Email sent successfully');
   } catch (error) {
     console.error('Error sending email:', error);
-    throw new Error('Error sending email');
+
+    throw new Error('Email could not be sent');
   }
-});
+};
 
 export default sendEmail;
