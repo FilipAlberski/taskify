@@ -1,5 +1,7 @@
 import mongoose from 'mongoose';
 
+import bcrypt from 'bcrypt';
+
 const workspaceSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -12,6 +14,37 @@ const workspaceSchema = new mongoose.Schema({
       ref: 'User',
     },
   ],
+
+  workspaceSettings: {
+    workSpaceMail: {
+      isTurnedOn: {
+        type: Boolean,
+        required: false,
+        default: false,
+      },
+
+      password: {
+        type: String,
+        required: false,
+      },
+      email: {
+        type: String,
+        required: false,
+      },
+      host: {
+        type: String,
+        required: false,
+      },
+      port: {
+        type: Number,
+        required: false,
+      },
+      ssl: {
+        type: Boolean,
+        required: false,
+      },
+    },
+  },
 
   channels: [
     {
@@ -50,3 +83,24 @@ const workspaceSchema = new mongoose.Schema({
     ref: 'User',
   },
 });
+
+const Workspace = mongoose.model('Workspace', workspaceSchema);
+
+Workspace.pre('save', function (next) {
+  this.updatedAt = Date.now();
+  next();
+});
+
+//password hashing for worskpaceSettings
+
+Workspace.pre('save', function (next) {
+  if (this.worskpaceSettings.workSpaceMail.password) {
+    this.worskpaceSettings.workSpaceMail.password = bcrypt.hashSync(
+      this.worskpaceSettings.workSpaceMail.password,
+      10
+    );
+  }
+  next();
+});
+
+export default Workspace;
