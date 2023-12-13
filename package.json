@@ -29,5 +29,8 @@
         "nodemailer": "^6.9.4",
         "nodemon": "^2.0.21",
         "path": "^0.12.7"
+    },
+    "devDependencies": {
+        "tailwindcss": "^3.3.6"
     }
 }
